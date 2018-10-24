@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="排序,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="直接插入排序基本思想：  把n个待排的元素看成一个有序表和一个无序表。开始时有序表只包含一个元素，无序表中包含n-1个元素，排序的过程中每次从无序表中取出第一个元素，将它插入有序表的适当位置，使之成为新的有序表，重复n-1次即可  123456789101112131415def insertSort(lists):    &quot;&quot;&quot;插入排序&quot;&quot;&quot;    size = len(lists)    fo">
+<meta name="keywords" content="排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法">
+<meta property="og:url" content="http://yoursite.com/2018/08/18/几种排序算法/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="直接插入排序基本思想：  把n个待排的元素看成一个有序表和一个无序表。开始时有序表只包含一个元素，无序表中包含n-1个元素，排序的过程中每次从无序表中取出第一个元素，将它插入有序表的适当位置，使之成为新的有序表，重复n-1次即可  123456789101112131415def insertSort(lists):    &quot;&quot;&quot;插入排序&quot;&quot;&quot;    size = len(lists)    fo">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180818/3j1CjGLKEc.gif">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180818/k1mc7Ia80m.gif">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180818/03m4lafDGe.gif">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180818/C1HihGGlHE.gif">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180819/LBl00KJBcb.webp">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180819/m8ak5iCcm5.webp">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180819/C0jI6KCKL4.webp">
+<meta property="og:updated_time" content="2018-10-09T01:05:43.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="排序算法">
+<meta name="twitter:description" content="直接插入排序基本思想：  把n个待排的元素看成一个有序表和一个无序表。开始时有序表只包含一个元素，无序表中包含n-1个元素，排序的过程中每次从无序表中取出第一个元素，将它插入有序表的适当位置，使之成为新的有序表，重复n-1次即可  123456789101112131415def insertSort(lists):    &quot;&quot;&quot;插入排序&quot;&quot;&quot;    size = len(lists)    fo">
+<meta name="twitter:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180818/3j1CjGLKEc.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/18/几种排序算法/">
+
+
+
+
+
+  <title>排序算法 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/几种排序算法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">排序算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-18T16:46:20+08:00">
+                2018-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Data-Structures-and-Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Data Structures and Algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h3><p><strong>基本思想：</strong></p>
+<blockquote>
+<p>把n个待排的元素看成一个有序表和一个无序表。开始时有序表只包含一个元素，无序表中包含n-1个元素，排序的过程中每次从无序表中取出第一个元素，将它插入有序表的适当位置，使之成为新的有序表，重复n-1次即可</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertSort</span><span class="params">(lists)</span>:</span></span><br><span class="line">    <span class="string">"""插入排序"""</span></span><br><span class="line">    size = len(lists)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, size):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> lists[j] &lt; lists[j - <span class="number">1</span>]:</span><br><span class="line">                lists[j], lists[j - <span class="number">1</span>] = lists[j - <span class="number">1</span>], lists[j]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    lists = [<span class="number">54</span>, <span class="number">26</span>, <span class="number">74</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">85</span>]</span><br><span class="line">    insertSort(lists)</span><br><span class="line">    print(lists)</span><br></pre></td></tr></table></figure>
+<h3 id="直接选择排序"><a href="#直接选择排序" class="headerlink" title="直接选择排序"></a>直接选择排序</h3><p><strong>基本思想：</strong></p>
+<blockquote>
+<p>选择排序（Selection Sort）是一种简单直观的排序算法。它的工作原理如下，首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectionSort</span><span class="params">(lists)</span>:</span></span><br><span class="line">    size = len(lists)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, size - <span class="number">1</span>):</span><br><span class="line">        minIndex = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, size):</span><br><span class="line">            <span class="keyword">if</span> lists[minIndex] &gt; lists[j]:</span><br><span class="line">                minIndex = j</span><br><span class="line">        <span class="keyword">if</span> i != minIndex:</span><br><span class="line">            lists[minIndex], lists[i] = lists[i], lists[minIndex]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    lists = [<span class="number">54</span>, <span class="number">26</span>, <span class="number">74</span>, <span class="number">12</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">85</span>]</span><br><span class="line">    selectionSort(lists)</span><br><span class="line">    print(lists)</span><br></pre></td></tr></table></figure>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p><strong>基本思想：</strong></p>
+<blockquote>
+<p>快速排序由C. A. R. Hoare在1962年提出。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快&gt;速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。 </p>
+</blockquote>
+<p><strong>算法步骤</strong></p>
+<ul>
+<li>从数列中挑出一个元素，称为”基准”（pivot），</li>
+<li>重新排序数列，所有比基准值小的元素摆放在基准前面，所有比基准值大的元素摆在基准后面（相同的数可以到任何一边）。在这个分区结束之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。</li>
+<li>递归地（recursively）把小于基准值元素的子数列和大于基准值元素的子数列排序。</li>
+</ul>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180818/3j1CjGLKEc.gif" alt="mark"></p>
+<p><code>代码实现：</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(lists,left,right)</span>:</span></span><br><span class="line">    <span class="comment">#快速排序</span></span><br><span class="line">    <span class="keyword">if</span> left &gt;= right:</span><br><span class="line">        <span class="keyword">return</span> lists</span><br><span class="line">    key = lists[left]</span><br><span class="line">    low = left</span><br><span class="line">    high = right</span><br><span class="line">    <span class="keyword">while</span> left &lt; right:</span><br><span class="line">        <span class="keyword">while</span> left &lt; right <span class="keyword">and</span> lists[right] &gt;= key:</span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">        lists[left] = lists[right]</span><br><span class="line">        <span class="keyword">while</span> left &lt; right <span class="keyword">and</span> lists[left] &lt;= key:</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">        lists[right] = lists[left]</span><br><span class="line">    lists[right] = key</span><br><span class="line">    quick_sort(lists,low,left<span class="number">-1</span>)</span><br><span class="line">    quick_sort(lists,left+<span class="number">1</span>,high)</span><br><span class="line">    <span class="keyword">return</span> lists</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    li = [<span class="number">12</span>,<span class="number">0</span>,<span class="number">25</span>,<span class="number">8</span>,<span class="number">369</span>,<span class="number">156</span>,<span class="number">24</span>,<span class="number">36</span>,<span class="number">48</span>]</span><br><span class="line">    a = quick_sort(li,<span class="number">0</span>,len(li)<span class="number">-1</span>)</span><br><span class="line">    print(a)</span><br></pre></td></tr></table></figure>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p><strong>基本思想：</strong></p>
+<blockquote>
+<p>归并排序是一种递归算法，它持续地将一个列表分成两半。如果列表是空的或者 只有一个元素，那么根据定义，它就被排序好了(最基本的情况)。如果列表里的元素超过一个，我们就把列表拆分，然后分别对两个部分调用递归排序。一旦这两个部分被排序好了，然后就可以对这两部分数列进行归并了。归并是这样一个过程:把两个排序好了的列表结合在一起组合成一个单一的有序的新列表。有自顶向下（递归法）和自底向上的两种实现方法。 </p>
+</blockquote>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180818/k1mc7Ia80m.gif" alt="mark"></p>
+<p>代码实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergesort</span><span class="params">(seq)</span>:</span></span><br><span class="line">    <span class="string">"""归并排序"""</span></span><br><span class="line">    <span class="keyword">if</span> len(seq) &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> seq</span><br><span class="line">    mid = len(seq)//<span class="number">2</span></span><br><span class="line">    left = mergesort(seq[:mid])</span><br><span class="line">    right = mergesort(seq[mid:])</span><br><span class="line">    <span class="keyword">return</span> merge(left,right)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(left,right)</span>:</span></span><br><span class="line">    <span class="string">"""合并两个已经排序好的列表，产生一个新的已排序好的列表"""</span></span><br><span class="line">    result = []</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; len(left) <span class="keyword">and</span> j &lt; len(right):</span><br><span class="line">        <span class="keyword">if</span> left[i] &lt;= right[j]:</span><br><span class="line">            result.append(left[i])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result.append(right[j])</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">    result += left[i:]</span><br><span class="line">    result += right[j:]</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">seq = [<span class="number">5</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">4</span>]</span><br><span class="line">print(<span class="string">"排序前："</span>,seq)</span><br><span class="line">result = mergesort(seq)</span><br><span class="line">print(<span class="string">"排序后："</span>,result)</span><br></pre></td></tr></table></figure>
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><p><strong>算法思想：</strong></p>
+<blockquote>
+<p>希尔排序有时又叫做“缩小间隔排序”，它以插入排序为基础，将原来要排序的列表划分为一些子列表，再对每一个子列表执行插入排序，从而实现对插入排序性能的改进。划分子列的特定方法是希尔排序的关键。我们并不是将原始列表分成含有连续元素的子列，而是确定一个划分列表的增量“i”，这个i更准确地说，是划分的间隔。然后把每间隔为i的所有元素选出来组成子列表，然后对每个子序列进行插入排序，最后当i=1时，对整体进行一次直接插入排序 </p>
+</blockquote>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180818/03m4lafDGe.gif" alt="mark"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shell_sort</span><span class="params">(lists)</span>:</span></span><br><span class="line">    <span class="comment"># 希尔排序</span></span><br><span class="line">    count = len(lists)</span><br><span class="line">    step = <span class="number">2</span></span><br><span class="line">    group = count / step</span><br><span class="line">    <span class="keyword">while</span> group &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, group):</span><br><span class="line">            j = i + group</span><br><span class="line">            <span class="keyword">while</span> j &lt; count:</span><br><span class="line">                k = j - group</span><br><span class="line">                key = lists[j]</span><br><span class="line">                <span class="keyword">while</span> k &gt;= <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">if</span> lists[k] &gt; key:</span><br><span class="line">                        lists[k + group] = lists[k]</span><br><span class="line">                        lists[k] = key</span><br><span class="line">                    k -= group</span><br><span class="line">                j += group</span><br><span class="line">        group /= step</span><br><span class="line">    <span class="keyword">return</span> lists</span><br></pre></td></tr></table></figure>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p><strong>算法原理:</strong></p>
+<blockquote>
+<p>冒泡排序要对一个列表多次重复遍历。它要比较相邻的两项，并且交换顺序排错的项。每对 列表实行一次遍历，就有一个最大项排在了正确的位置。大体上讲，列表的每一个数据项都会在 其相应的位置“冒泡”。如果列表有n项，第一次遍历就要比较n-1对数据。需要注意，一旦列 表中最大(按照规定的原则定义大小)的数据是所比较的数据对中的一个，它就会沿着列表一直 后移，直到这次遍历结束。</p>
+</blockquote>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180818/C1HihGGlHE.gif" alt="mark"></p>
+<p><code>代码实现：</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(lists)</span>:</span></span><br><span class="line">    <span class="comment"># 冒泡排序</span></span><br><span class="line">    count = len(lists)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, count):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, count):</span><br><span class="line">            <span class="keyword">if</span> lists[i] &gt; lists[j]:</span><br><span class="line">                lists[i], lists[j] = lists[j], lists[i]</span><br><span class="line">    <span class="keyword">return</span> lists</span><br></pre></td></tr></table></figure>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p><strong>算法原理</strong></p>
+<ul>
+<li><p>堆的概念</p>
+<p>堆：本质是一种数组对象，特别重要的一点性质：任意的叶子节点小于（或大于）它所有的父节点。对此，又分为大顶堆和小顶堆，大顶堆要求节点的元素都要大于其孩子，小顶堆要求节点元素都小于其左右孩子，两者对左右孩子的大小关系不做任何要求。</p>
+<p>利用堆排序，就是基于大顶堆或者小顶堆的一种排序方法下面，我们通过大顶堆来实现。</p>
+</li>
+<li><p>基本思想</p>
+<p>堆排序可以按照以下步骤来完成：</p>
+<p>首先将序列构建称为大顶堆</p>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180819/LBl00KJBcb.webp" alt="mark"></p>
+<p>构建大顶堆</p>
+<p>1.取出当前大顶堆的根节点，将其与序列末尾元素进行交换（此时：序列末尾的元素为已排序的最大值；由于交换了元素，当前位于根节点的堆并不一定满足大顶堆的性质）；</p>
+<p>2.对交换后的n-1个序列元素进行调整，使其满足大顶堆的性质；</p>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180819/m8ak5iCcm5.webp" alt="mark"></p>
+<p>重复2.3步骤，直至堆中只有1个元素为止 </p>
+</li>
+</ul>
+<p><code>代码实现</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 调整堆</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">adjust_heap</span><span class="params">(lists, i, size)</span>:</span></span><br><span class="line">    lchild = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">    rchild = <span class="number">2</span> * i + <span class="number">2</span></span><br><span class="line">    max = i</span><br><span class="line">    <span class="keyword">if</span> i &lt; size // <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">if</span> lchild &lt; size <span class="keyword">and</span> lists[lchild] &gt; lists[max]:</span><br><span class="line">            max = lchild</span><br><span class="line">        <span class="keyword">if</span> rchild &lt; size <span class="keyword">and</span> lists[rchild] &gt; lists[max]:</span><br><span class="line">            max = rchild</span><br><span class="line">        <span class="keyword">if</span> max != i:</span><br><span class="line">            lists[max], lists[i] = lists[i], lists[max]</span><br><span class="line">            adjust_heap(lists, max, size)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#创建堆</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_heap</span><span class="params">(lists, size)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, (size//<span class="number">2</span>))[::<span class="number">-1</span>]:</span><br><span class="line">        adjust_heap(lists, i, size)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 堆排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heap_sort</span><span class="params">(lists)</span>:</span></span><br><span class="line">    size = len(lists)</span><br><span class="line">    build_heap(lists, size)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, size)[::<span class="number">-1</span>]:</span><br><span class="line">        lists[<span class="number">0</span>], lists[i] = lists[i], lists[<span class="number">0</span>]</span><br><span class="line">        adjust_heap(lists, <span class="number">0</span>, i)</span><br></pre></td></tr></table></figure>
+<h3 id="何为排序算法的稳定性"><a href="#何为排序算法的稳定性" class="headerlink" title="何为排序算法的稳定性"></a>何为排序算法的稳定性</h3><p>稳定的排序算法会让原本有相等键值的记录维持相对次序。也就是如果一个排序算法时稳定的，当有两个相等键值的记录R和S，且再原本的列表中R出现在S之前，在排序过的列表中R也将会是在S之前。</p>
+<p>当相等的元素是无法分辨的，比如像是整数，稳定性并不是一个问题。然而，假设以下的数对将要以他们的第一个数字来排序</p>
+<p><code>(4,1) (3,1) (3,7) (5,6)</code></p>
+<p>在这个状况下，有可能产生两种不同的结果，一个是让相等键值的记录维持相对的次序，而另外一个则没有：</p>
+<p><code>(3,1) (3,7) (4,1) (5,6)</code> (维持次序)</p>
+<p>·<code>(3,7) (3,1) (4,1) (5,6)</code> (次序改变)</p>
+<p>不稳定的排序算法可能会在相等的键值中改变记录的相对次序，但是稳定排序算法从来不会如此。不稳定排序算法可以特别的实现为稳定。</p>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><ol>
+<li>若n较小(n&lt;=50)时，科采用直接插入或直接选择排序</li>
+<li>若文件的初始状态基本有序（指正序），则应选用直接插入、冒泡或者快速排序</li>
+<li>若n较大，则应采用：快速排序、堆排序或归并排序。</li>
+</ol>
+<h3 id="性能比较"><a href="#性能比较" class="headerlink" title="性能比较"></a>性能比较</h3><p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180819/C0jI6KCKL4.webp" alt="mark"></p>
+<p>相关链接：<a href="https://mp.weixin.qq.com/s/VX9LwTK77RUPLBFHPS1Z1A" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/VX9LwTK77RUPLBFHPS1Z1A</a></p>
+<p>相关链接：<a href="https://mp.weixin.qq.com/s/aSrvCPf8jmrYtVChsV7-Wg" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/aSrvCPf8jmrYtVChsV7-Wg</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/排序/" rel="tag"># 排序</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/18/利用Kenkins定时执行python脚本/" rel="next" title="利用Kenkins定时执行python脚本">
+                <i class="fa fa-chevron-left"></i> 利用Kenkins定时执行python脚本
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/19/死锁/" rel="prev" title="死锁">
+                死锁 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接插入排序"><span class="nav-number">1.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接选择排序"><span class="nav-number">2.</span> <span class="nav-text">直接选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序"><span class="nav-number">3.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">4.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序"><span class="nav-number">5.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序"><span class="nav-number">6.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">7.</span> <span class="nav-text">堆排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#何为排序算法的稳定性"><span class="nav-number">8.</span> <span class="nav-text">何为排序算法的稳定性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用场景"><span class="nav-number">9.</span> <span class="nav-text">适用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能比较"><span class="nav-number">10.</span> <span class="nav-text">性能比较</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

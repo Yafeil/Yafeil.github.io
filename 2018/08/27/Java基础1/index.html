@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="面向对象的三个特征封装、继承、多态，有时加上抽象 创建对象的几种方式 采用new 通过反射 采用clone 通过序列化机制  一个java文件内部可以有类吗？只能有一个public公共类，并且public的类名必须与文件名相一致，但是可以有多个default修饰的类。 String 是基本数据类型吗不是。在Java中内建了8种数据类型来存储整数、浮点数、字符和布尔值。数据类型分类如下：  基本数据">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础1">
+<meta property="og:url" content="http://yoursite.com/2018/08/27/Java基础1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="面向对象的三个特征封装、继承、多态，有时加上抽象 创建对象的几种方式 采用new 通过反射 采用clone 通过序列化机制  一个java文件内部可以有类吗？只能有一个public公共类，并且public的类名必须与文件名相一致，但是可以有多个default修饰的类。 String 是基本数据类型吗不是。在Java中内建了8种数据类型来存储整数、浮点数、字符和布尔值。数据类型分类如下：  基本数据">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-04T14:54:41.747Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础1">
+<meta name="twitter:description" content="面向对象的三个特征封装、继承、多态，有时加上抽象 创建对象的几种方式 采用new 通过反射 采用clone 通过序列化机制  一个java文件内部可以有类吗？只能有一个public公共类，并且public的类名必须与文件名相一致，但是可以有多个default修饰的类。 String 是基本数据类型吗不是。在Java中内建了8种数据类型来存储整数、浮点数、字符和布尔值。数据类型分类如下：  基本数据">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/27/Java基础1/">
+
+
+
+
+
+  <title>Java基础1 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/Java基础1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java基础1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-27T11:09:04+08:00">
+                2018-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="面向对象的三个特征"><a href="#面向对象的三个特征" class="headerlink" title="面向对象的三个特征"></a>面向对象的三个特征</h4><p>封装、继承、多态，有时加上抽象</p>
+<h4 id="创建对象的几种方式"><a href="#创建对象的几种方式" class="headerlink" title="创建对象的几种方式"></a>创建对象的几种方式</h4><ol>
+<li>采用new</li>
+<li>通过反射</li>
+<li>采用clone</li>
+<li>通过序列化机制</li>
+</ol>
+<h4 id="一个java文件内部可以有类吗？"><a href="#一个java文件内部可以有类吗？" class="headerlink" title="一个java文件内部可以有类吗？"></a>一个java文件内部可以有类吗？</h4><p>只能有一个public公共类，并且public的类名必须与文件名相一致，但是可以有多个default修饰的类。</p>
+<h4 id="String-是基本数据类型吗"><a href="#String-是基本数据类型吗" class="headerlink" title="String 是基本数据类型吗"></a>String 是基本数据类型吗</h4><p>不是。在Java中内建了8种数据类型来存储整数、浮点数、字符和布尔值。数据类型分类如下：</p>
+<ul>
+<li>基本数据类型<ul>
+<li>整形：long、int、short、byte</li>
+<li>浮点型：float、double</li>
+<li>布尔型：boolean</li>
+<li>字符型：char</li>
+</ul>
+</li>
+<li>引用数据类型<ul>
+<li>数组</li>
+<li>接口</li>
+<li>类</li>
+</ul>
+</li>
+</ul>
+<h4 id="构造器是否能够被重写"><a href="#构造器是否能够被重写" class="headerlink" title="构造器是否能够被重写"></a>构造器是否能够被重写</h4><p>构造器不能够被继承，因此不能被重写，但可以被重载</p>
+<h4 id="参数静态变量和实例变量的区别"><a href="#参数静态变量和实例变量的区别" class="headerlink" title="参数静态变量和实例变量的区别"></a>参数静态变量和实例变量的区别</h4><p>静态变量是被<strong>static</strong>修饰符修饰的变量，也称为类变量，它属于类，不属于类中的任何一个对象，一个类不管创建多少个对象，静态变量在内存中有且仅有一个拷贝；实例变量必须依存于某一个实例，需要先创建对象然后通过对象才能访问到它。静态变量可以实现让多个对象共享内存。</p>
+<h4 id="是否可以从一个静态方法内部发出对非静态方法的调用"><a href="#是否可以从一个静态方法内部发出对非静态方法的调用" class="headerlink" title="是否可以从一个静态方法内部发出对非静态方法的调用"></a>是否可以从一个静态方法内部发出对非静态方法的调用</h4><p>不可以，静态方法只能是访问静态成员，因为非静态方法发的调用要先创建对象，在调用静态方法时可能对象对没有被初始化</p>
+<h4 id="Java中的final关键字有哪些用法"><a href="#Java中的final关键字有哪些用法" class="headerlink" title="Java中的final关键字有哪些用法"></a>Java中的final关键字有哪些用法</h4><p>final关键字的中文含义是“最终“，可以修饰常量、方法和类。</p>
+<ol>
+<li>修饰类，表示该类不能够被继承</li>
+<li>修饰方法，表示方法不能被重写</li>
+<li>修饰变量，表示变量只能一次赋值后不能够被修改(常量)，引用变量的值还是可以修改的</li>
+</ol>
+<h4 id="amp-和-amp-amp-的区别"><a href="#amp-和-amp-amp-的区别" class="headerlink" title="&amp;和&amp;&amp;的区别"></a>&amp;和&amp;&amp;的区别</h4><p>&amp;运算符有两种用法:</p>
+<ol>
+<li>按位与</li>
+<li>逻辑与</li>
+</ol>
+<p>&amp;&amp;是短路与运算符。逻辑与和短路与的差别是很大的，虽然二者都要求运算符左右两端的布尔值都是true整个表达式才是true。&amp;&amp;之所以称为短路运算时因为，如果&amp;&amp;左边的表达式值是false，右边的表达式会被直接短路掉，不会进行运算。</p>
+<h4 id="String类是否可以继承"><a href="#String类是否可以继承" class="headerlink" title="String类是否可以继承"></a>String类是否可以继承</h4><p>String类时final类，不可以被继承</p>
+<h4 id="静态变量与实例变量的区别"><a href="#静态变量与实例变量的区别" class="headerlink" title="静态变量与实例变量的区别"></a>静态变量与实例变量的区别</h4><ul>
+<li>在语法定义上的区别: 静态变量前要加static关键字，而实例变量是不需要加的</li>
+<li>在程序运行时的区别，实例变量属于某个对象的属性，必须创建了实例对象，其中的示例变量才会被分配空间，才能使用这个实例变量。静态变量不属于某个实例对象，而是属于类。所以也称为类变量，只要是程序加载了类的字节码，不用创建任何实例对象，静态变量就会被分配空间，静态变量就可以被使用了</li>
+<li>总之，实例变量必须创建对象后才可以通过这个对象使用，静态变量则可以通过类名直接使用。</li>
+<li>对于实例变量，每创建一个实例，JVM就会为实例变量分配一次内存，实例变量可以在内存中有多个备份，互不影响。实例变量隶属于对象。在类的内部，非静态方法可以直接访问实例变量。本类中的静态方法或其他类，则需要本类的实例变量访问实例变量</li>
+<li>对于静态变量，加载类的过程中完成静态变量的内存分配，JVM只为静态变量分配一次内存，而且静态变量在内存中只有一个备份。静态变量可以被所有的对象之间共享。在本类中，任何方法都可以直接访问静态变量，当然也可以通过对象来访问（不推荐）。在其他类中，则需要类名来访问静态变量。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/26/Java的继承与多态/" rel="next" title="Java的继承与多态">
+                <i class="fa fa-chevron-left"></i> Java的继承与多态
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/27/脑控飞行器之MATLAB部分/" rel="prev" title="脑控飞行器之MATLAB部分">
+                脑控飞行器之MATLAB部分 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象的三个特征"><span class="nav-number">1.</span> <span class="nav-text">面向对象的三个特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建对象的几种方式"><span class="nav-number">2.</span> <span class="nav-text">创建对象的几种方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一个java文件内部可以有类吗？"><span class="nav-number">3.</span> <span class="nav-text">一个java文件内部可以有类吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String-是基本数据类型吗"><span class="nav-number">4.</span> <span class="nav-text">String 是基本数据类型吗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造器是否能够被重写"><span class="nav-number">5.</span> <span class="nav-text">构造器是否能够被重写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数静态变量和实例变量的区别"><span class="nav-number">6.</span> <span class="nav-text">参数静态变量和实例变量的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#是否可以从一个静态方法内部发出对非静态方法的调用"><span class="nav-number">7.</span> <span class="nav-text">是否可以从一个静态方法内部发出对非静态方法的调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java中的final关键字有哪些用法"><span class="nav-number">8.</span> <span class="nav-text">Java中的final关键字有哪些用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#amp-和-amp-amp-的区别"><span class="nav-number">9.</span> <span class="nav-text">&amp;和&amp;&amp;的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String类是否可以继承"><span class="nav-number">10.</span> <span class="nav-text">String类是否可以继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#静态变量与实例变量的区别"><span class="nav-number">11.</span> <span class="nav-text">静态变量与实例变量的区别</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

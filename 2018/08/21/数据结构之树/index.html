@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Data Structure,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="树的概念是一种抽象数据类型或是视作这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n个有限结点组成一个具有层次关系的集合。  每个结点有零个或多个子结点 没有父节点的结点称为根结点 每一个非根结点有且只有一个父节点 除了根结点外，每个子结点可以分为多个不相交的子树  树其实就是不包含贿赂的连无向图。 树的术语注：我们在对一颗树进行讨论的时候，树的节点或者结点是可以相互使用的，">
+<meta name="keywords" content="Data Structure">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树总结">
+<meta property="og:url" content="http://yoursite.com/2018/08/21/数据结构之树/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="树的概念是一种抽象数据类型或是视作这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n个有限结点组成一个具有层次关系的集合。  每个结点有零个或多个子结点 没有父节点的结点称为根结点 每一个非根结点有且只有一个父节点 除了根结点外，每个子结点可以分为多个不相交的子树  树其实就是不包含贿赂的连无向图。 树的术语注：我们在对一颗树进行讨论的时候，树的节点或者结点是可以相互使用的，">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180910/8jl6Faabeb.png?imageslim">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180910/1d3lbCC6jf.png?imageslim">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/ha48BE4Ilc.png?imageslim">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/hfbmlLCF1B.png?imageslim">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/4Be9jib34L.png?imageslim">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/amdDFm913e.png?imageslim">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/Fej35IAFFb.gif">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/i970lke84k.png?imageslim">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180910/fkICkl36jg.png?imageslim">
+<meta property="og:updated_time" content="2018-09-27T02:42:09.249Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉树总结">
+<meta name="twitter:description" content="树的概念是一种抽象数据类型或是视作这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n个有限结点组成一个具有层次关系的集合。  每个结点有零个或多个子结点 没有父节点的结点称为根结点 每一个非根结点有且只有一个父节点 除了根结点外，每个子结点可以分为多个不相交的子树  树其实就是不包含贿赂的连无向图。 树的术语注：我们在对一颗树进行讨论的时候，树的节点或者结点是可以相互使用的，">
+<meta name="twitter:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180910/8jl6Faabeb.png?imageslim">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/21/数据结构之树/">
+
+
+
+
+
+  <title>二叉树总结 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/21/数据结构之树/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">二叉树总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-21T11:24:03+08:00">
+                2018-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="树的概念"><a href="#树的概念" class="headerlink" title="树的概念"></a>树的概念</h1><p>是一种抽象数据类型或是视作这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n个有限结点组成一个具有层次关系的集合。</p>
+<ul>
+<li>每个结点有零个或多个子结点</li>
+<li>没有父节点的结点称为根结点</li>
+<li>每一个非根结点有且只有一个父节点</li>
+<li>除了根结点外，每个子结点可以分为多个不相交的子树</li>
+</ul>
+<p>树其实就是不包含贿赂的连无向图。</p>
+<h4 id="树的术语"><a href="#树的术语" class="headerlink" title="树的术语"></a>树的术语</h4><p><strong>注：我们在对一颗树进行讨论的时候，树的节点或者结点是可以相互使用的，意义一样</strong></p>
+<ul>
+<li>节点的度：一个节点含有子树的个数称为该节点的度</li>
+<li>树的度：一颗树中，最大结点的度称为树的度</li>
+<li>叶节点：度为零的节点</li>
+<li>父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点</li>
+<li>孩子节点或子节点：一个节点含有的子树的根结点称为该节点的子节点</li>
+<li>兄弟节点：具有相同父节点的子节点称为兄弟节点</li>
+<li>节点的层次：从根开始定义起，根为第一层，根的子节点为第二层，以此类推</li>
+<li>树的高度或者深度：树中节点的最大层次</li>
+</ul>
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>二叉树是每个节点最多有两个子树的树结构。通常子树被称作“左子树”和“右子树”</p>
+<h4 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h4><ul>
+<li>在二叉树的第i层上至多有2^(i-1)个节点</li>
+<li>深度为k的二叉树至多有2^k-1个节点</li>
+</ul>
+<h2 id="二叉树的分类"><a href="#二叉树的分类" class="headerlink" title="二叉树的分类"></a>二叉树的分类</h2><h3 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h3><p>一颗深度为k且有2^k-1个结点的二叉树称为满二叉树。如图</p>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180910/8jl6Faabeb.png?imageslim" alt="mark"></p>
+<h3 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h3><p>若设二叉树的深度为h,除第h层外，其它各层(1~h-1)的结点数都达到最大个数，第h层所有的结点都连续集中在最左边，这就是完全二叉树。如图：</p>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180910/1d3lbCC6jf.png?imageslim" alt="mark"></p>
+<h3 id="二叉查找树（BST）"><a href="#二叉查找树（BST）" class="headerlink" title="二叉查找树（BST）"></a>二叉查找树（BST）</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>二叉查找树(Binary Search Tree)，也称为二叉搜索树、有序二叉树或排序二叉树，是一种特殊的二叉树，它改善了二叉树节点的查找效率。</p>
+<h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><ol>
+<li>其左子树下的每个后代节点的值都小于节点n的值</li>
+<li>其右子树下的每个后代节点的值都大于节点n的值</li>
+<li>任意节点的左右子树也也分别为二叉查找树</li>
+<li>没有键值相等的节点</li>
+</ol>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/ha48BE4Ilc.png?imageslim" alt="mark"></p>
+<p>总结来说，我们使用的查找算法过程如下：</p>
+<p>假设我们要查找节点 n，从 BST 的根节点开始。算法不断地比较节点值的大小直到找到该节点，或者判定不存在。每一步我们都要处理两个节点：树中的一个节点，称为节点 c，和要查找的节点 n，然后并比较 c 和 n 的值。开始时，节点 c 为 BST 的根节点。然后执行以下步骤：</p>
+<ol>
+<li>如果 c 值为空，则 n 不在 BST 中；</li>
+<li>比较 c 和 n 的值；</li>
+<li>如果值相同，则找到了指定节点 n；</li>
+<li>如果 n 的值小于 c，那么如果 n 存在，必然在 c 的左子树中。回到第 1 步，将 c 的左孩子作为 c；</li>
+<li>如果 n 的值大于 c，那么如果 n 存在，必然在 c 的右子树中。回到第 1 步，将 c 的右孩子作为 c；</li>
+</ol>
+<p>通过BST查找节点，理想情况下我们需要检查的节点数可以减半。如下图的BST树，包含了15个节点，从根节点开始执行查找算法，第一次比较决定我们是移向左子树还是移向右子树。对于任意一种情况，一旦执行这一步，我们需要访问的节点数就减少了一般，从15到7。同样，下一步的访问的节点也减少了一半，从7降到3，依此类推。</p>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/hfbmlLCF1B.png?imageslim" alt="mark"></p>
+<p>根据这一特点，查找算法的时间复杂度应该是 O(log­2n)，简写为 O(lg n)。我们在文章《<a href="http://www.cnblogs.com/gaochundong/p/complexity_of_algorithms.html" target="_blank" rel="noopener">算法复杂度分析</a>》中有一些关于时间复杂度的描述。可知，log­2n = y，相当于 2y = n。即，如果节点数量增加 n，查找时间只缓慢地增加到 log­2n。下图中显示了 O(log­2n) 和线性增长 O(n) 的增长率之间的区别。时间复杂度为 O(log­2n) 的算法运行时间为下面那条线。</p>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/4Be9jib34L.png?imageslim" alt="mark"></p>
+<p>从上图可以看出，O(log­2n) 曲线几乎是水平的，随着 n 值的增加，曲线增长十分缓慢。举例来说，查找一个具有 1000 个元素的数组，需要查询 1000 个元素，而查找一个具有 1000 个元素的 BST 树，仅需查询不到10 个节点（log21024 = 10）。</p>
+<p>而实际上，对于 BST 查找算法来说，其十分依赖于树中节点的拓扑结构，也就是节点间的布局关系。下图描绘了一个节点插入顺序为 20, 50, 90, 150, 175, 200 的 BST 树。这些节点是按照递升顺序被插入的，结果就是这棵树没有广度（Breadth）可言。也就是说，它的拓扑结构其实就是将节点排布在一条线上，而不是以扇形结构散开，所以查找时间也为 O(n)。</p>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/amdDFm913e.png?imageslim" alt="mark"></p>
+<p>当 BST 树中的节点以扇形结构散开时，对它的插入、删除和查找操作最优的情况下可以达到亚线性的运行时间 O(log2n)。因为当在 BST 中查找一个节点时，每一步比较操作后都会将节点的数量减少一半。尽管如此，如果拓扑结构像上图中的样子时，运行时间就会退减到线性时间 O(n)。因为每一步比较操作后还是需要逐个比较其余的节点。也就是说，在这种情况下，在 BST 中查找节点与在数组（Array）中查找就基本类似了。</p>
+<p>因此，<strong>BST 算法查找时间依赖于树的拓扑结构。最佳情况是 O(log­2n)，而最坏情况是 O(n)。</strong></p>
+<h4 id="插入节点"><a href="#插入节点" class="headerlink" title="插入节点"></a>插入节点</h4><p>当向树中插入一个新节点时，该节点将总是作为叶子节点。所以，最困难的地方在于如何找到该节点的父节点。类似于查找算法中的描述，我们将这个新的节点称为节点n，而遍历的当前节点称为节点c。开始时，节点c为BST的根节点。则定为n节点的父节点步骤如下：</p>
+<ol>
+<li>如果节点 c 为空，则节点 c 的父节点将作为节点 n 的父节点。如果节点 n 的值小于该父节点的值，则节点 n 将作为该父节点的左孩子；否则节点 n 将作为该父节点的右孩子。</li>
+<li>比较节点 c 与节点 n 的值。</li>
+<li>如果节点 c 的值与节点 n 的值相等，则说明用户在试图插入一个重复的节点。解决办法可以是直接丢弃节点 n，或者可以抛出异常。</li>
+<li>如果节点 n 的值小于节点 c 的值，则说明节点 n 一定是在节点 c 的左子树中。则将父节点设置为节点 c，并将节点 c 设置为节点 c 的左孩子，然后返回至第 1 步。</li>
+<li>如果节点 n 的值大于节点 c 的值，则说明节点 n 一定是在节点 c 的右子树中。则将父节点设置为节点 c，并将节点 c 设置为节点 c 的右孩子，然后返回至第 1 步。</li>
+</ol>
+<p>当合适的节点找到时，该算法结束。从而使新节点被放入 BST 中成为某一父节点合适的孩子节点。<br><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/Fej35IAFFb.gif" alt="mark"></p>
+<p><strong>BST 的插入算法的复杂度与查找算法的复杂度是一样的：最佳情况是 O(log­2n)，而最坏情况是 O(n)。</strong>因为它们对节点的查找定位策略是相同的。</p>
+<h4 id="插入节点-1"><a href="#插入节点-1" class="headerlink" title="插入节点"></a>插入节点</h4><p>从 BST 中删除节点比插入节点难度更大。因为删除一个非叶子节点，就必须选择其他节点来填补因删除节点所造成的树的断裂。如果不选择节点来填补这个断裂，那么就违背了 BST 的性质要求。</p>
+<p>删除节点算法的第一步是定位要被删除的节点，这可以使用前面介绍的查找算法，因此运行时间为 O(log­2n)。接着应该选择合适的节点来代替删除节点的位置，它共有三种情况需要考虑。</p>
+<ul>
+<li><strong>情况 1：</strong>如果删除的节点没有右孩子，那么就选择它的左孩子来代替原来的节点。二叉查找树的性质保证了被删除节点的左子树必然符合二叉查找树的性质。因此左子树的值要么都大于，要么都小于被删除节点的父节点的值，这取决于被删除节点是左孩子还是右孩子。因此用被删除节点的左子树来替代被删除节点，是完全符合二叉搜索树的性质的。</li>
+<li><strong>情况 2：</strong>如果被删除节点的右孩子没有左孩子，那么这个右孩子被用来替换被删除节点。因为被删除节点的右孩子都大于被删除节点左子树的所有节点，同时也大于或小于被删除节点的父节点，这同样取决于被删除节点是左孩子还是右孩子。因此，用右孩子来替换被删除节点，符合二叉查找树的性质。</li>
+<li><strong>情况 3：</strong>如果被删除节点的右孩子有左孩子，就需要用被删除节点右孩子的左子树中的最下面的节点来替换它，就是说，我们用被删除节点的右子树中最小值的节点来替换。</li>
+</ul>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180919/i970lke84k.png?imageslim" alt="mark"></p>
+<p>我们知道，在 BST 中，最小值的节点总是在最左边，最大值的节点总是在最右边。因此替换被删除节点右子树中最小的一个节点，就保证了该节点一定大于被删除节点左子树的所有节点。同时，也保证它替代了被删除节点的位置后，它的右子树的所有节点值都大于它。因此这种选择策略符合二叉查找树的性质。</p>
+<p>和查找、插入算法类似，<strong>删除算法的运行时间也与 BST 的拓扑结构有关，最佳情况是 O(log­2n)，而最坏情况是 O(n)。</strong></p>
+<h3 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>平衡二叉树(Balanced Binary Tree)又被称为AVL数，且具有以下性质：它是一颗空树或者它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一颗平衡二叉树。</p>
+<p>常用的算法为：红黑树、AVL树、Treap树</p>
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><p>二叉树支持动态的插入和查找，保证操作在O(height)时间，这就是完成了哈希表不便完成的工作，动态性。但是二叉树有可能出现worst-case，如果输入序列已经排序，则时间复杂度为O(N)</p>
+<p>平衡二叉树/红黑树就是为了将查找的时间复杂度保证在O(logN)范围内。</p>
+<p>所以如果输入集合确定，所需要的就是查询，则可以考虑使用哈希表，如果输入集合不确定，则考虑使用平衡二叉树/红黑树，保证达到最大效率</p>
+<p>平衡二叉树主要优点集中在快速查找。</p>
+<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><h6 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h6><p>R_B Tree，全称是Red-black Tree,又称为“红黑树”，它是一种自平衡的<strong>二叉查找树</strong>。但它在二叉树的基础上添加了着色和相关的性质使得红黑树相对平衡，从而保证红黑树的查找、插入、删除的时间复杂度最坏为O(lgn)。</p>
+<h6 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h6><p>红黑树，除了满足二叉查找树的一般性质，还具有以下5个性质</p>
+<ul>
+<li>每个节点都是红色或者黑色</li>
+<li>根结点是黑色</li>
+<li>每个叶子节点是黑色</li>
+<li>如果一个节点是红色的，则它的子节点必须是黑色的</li>
+<li>从任一个节点到该节点的子孙节点的所有路径上包含相同数目的黑节点。</li>
+</ul>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180910/fkICkl36jg.png?imageslim" alt="mark"></p>
+<h6 id="红黑树的应用"><a href="#红黑树的应用" class="headerlink" title="红黑树的应用"></a>红黑树的应用</h6><p>我们知道，二叉查找树在大多数情况下查找和插入在效率上是没有问题的，但是在最坏的情况下效率比较低，但是平衡二叉树能偶在最坏的情况下也能够达到lgN，要实现这一目标，就要保证在插入完成后始终保持平衡状态。在一棵具有N个节点的树中，我们希望该树的高度能够维持在lgN左右，这样我们就能保证只需要lgN次比较操作就可以查找到想要的值。不幸的是，每次插入元素之后维持树的平衡状态太昂贵。所以就出现一些新的数据结构来保证在最坏的情况下插入和查找效率都能保证在对数的时间复杂度内完成。而我们所讲的红黑树就属于此新的数据结构之一，除此之外还有B树等数据结构。</p>
+<h3 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h3><h3 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h3><h1 id="树的实现"><a href="#树的实现" class="headerlink" title="树的实现"></a>树的实现</h1><h3 id="二叉树的深度"><a href="#二叉树的深度" class="headerlink" title="二叉树的深度"></a>二叉树的深度</h3><p><strong>输入一颗二叉树，求该树的深度。从根结点到叶节点依次经过的结点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,x)</span>:</span></span><br><span class="line">        self.val = x</span><br><span class="line">        self.left = <span class="keyword">None</span></span><br><span class="line">        self.right = <span class="keyword">None</span></span><br></pre></td></tr></table></figure>
+<h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">TreeDepth</span><span class="params">(self,pRoot)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> pRoot:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        A = []</span><br><span class="line">        depth = <span class="number">0</span></span><br><span class="line">        A.append(pRoot)</span><br><span class="line">        <span class="keyword">while</span> A:</span><br><span class="line">            temp = []</span><br><span class="line">            <span class="keyword">for</span> node <span class="keyword">in</span> A:</span><br><span class="line">                <span class="keyword">if</span> node.left:</span><br><span class="line">                    temp.append(node.left)</span><br><span class="line">                <span class="keyword">if</span> node.right:</span><br><span class="line">                    temp.append(node.right)</span><br><span class="line">            A = temp</span><br><span class="line">            depth += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> depth</span><br></pre></td></tr></table></figure>
+<h5 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h5><p>注：此题思路想不通</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">TreeDepth</span><span class="params">(self,pRoot)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> pRoot:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> max(self.TreeDepth(pRoot.left),self.TreeDepth(pRoot.right))+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h3><h4 id="二叉树的创建及遍历"><a href="#二叉树的创建及遍历" class="headerlink" title="二叉树的创建及遍历"></a>二叉树的创建及遍历</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""节点的创建"""</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,val=None)</span>:</span></span><br><span class="line">		self.val =val</span><br><span class="line">		self.lchild = <span class="keyword">None</span></span><br><span class="line">		self.rchild = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinaryTree</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		self.root = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">is_empty</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="string">"""判空"""</span></span><br><span class="line">		<span class="keyword">return</span> self.root == <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self,val)</span>:</span></span><br><span class="line">		<span class="string">"""添加节点"""</span></span><br><span class="line">		node = Node(val)</span><br><span class="line">		<span class="keyword">if</span> self.root == <span class="keyword">None</span>:</span><br><span class="line">			self.root = node</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		queue = [self.root]</span><br><span class="line">		<span class="keyword">while</span> queue:</span><br><span class="line">			cur = queue.pop(<span class="number">0</span>)</span><br><span class="line">			<span class="keyword">if</span> cur.lchild == <span class="keyword">None</span>:</span><br><span class="line">				cur.lchild = node</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				queue.append(cur.lchild)</span><br><span class="line">			<span class="keyword">if</span> cur.rchild == <span class="keyword">None</span>:</span><br><span class="line">				cur.rchild = node</span><br><span class="line">				<span class="keyword">return</span> </span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				queue.append(cur.rchild)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">breadth_travel</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="string">"""广度优先遍历"""</span></span><br><span class="line">		<span class="keyword">if</span> self.root == <span class="keyword">None</span>:</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		queue = [self.root]</span><br><span class="line">		<span class="keyword">while</span> queue:</span><br><span class="line">			cur = queue.pop(<span class="number">0</span>)</span><br><span class="line">			print(cur.val,end=<span class="string">' '</span>)</span><br><span class="line">			<span class="keyword">if</span> cur.lchild:</span><br><span class="line">				queue.append(cur.lchild)</span><br><span class="line">			<span class="keyword">if</span> cur.rchild:</span><br><span class="line">				queue.append(cur.rchild)</span><br><span class="line">		print()</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">preorder</span><span class="params">(self,node)</span>:</span></span><br><span class="line">		<span class="string">"""先序遍历"""</span></span><br><span class="line">		<span class="keyword">if</span> node == <span class="keyword">None</span>:</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		print(node.val,end=<span class="string">' '</span>)</span><br><span class="line">		self.preorder(node.lchild)</span><br><span class="line">		self.preorder(node.rchild)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">inorder</span><span class="params">(self,node)</span>:</span></span><br><span class="line">		<span class="string">"""中序遍历"""</span></span><br><span class="line">		<span class="keyword">if</span> node == <span class="keyword">None</span>:</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		self.inorder(node.lchild)</span><br><span class="line">		print(node.val,end=<span class="string">' '</span>)</span><br><span class="line">		self.inorder(node.rchild)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">postorder</span><span class="params">(self,node)</span>:</span></span><br><span class="line">		<span class="string">"""后序遍历"""</span></span><br><span class="line">		<span class="keyword">if</span> node == <span class="keyword">None</span>:</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		self.postorder(node.lchild)</span><br><span class="line">		self.postorder(node.rchild)</span><br><span class="line">		print(node.val,end=<span class="string">' '</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	t = BinaryTree()</span><br><span class="line">	print(t.is_empty())</span><br><span class="line">	t.add(<span class="number">1</span>)</span><br><span class="line">	t.add(<span class="number">2</span>)</span><br><span class="line">	t.add(<span class="number">3</span>)</span><br><span class="line">	t.breadth_travel()</span><br><span class="line">	t.preorder(t.root)</span><br><span class="line">	t.inorder(t.root)</span><br><span class="line">	t.postorder(t.root)</span><br></pre></td></tr></table></figure>
+<h3 id="二叉树的重建"><a href="#二叉树的重建" class="headerlink" title="二叉树的重建"></a>二叉树的重建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3><h3 id="二叉排序树"><a href="#二叉排序树" class="headerlink" title="二叉排序树"></a>二叉排序树</h3><p>代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,key,value,parent=None,left=None,right=None)</span>:</span></span><br><span class="line">        self.key = key</span><br><span class="line">        self.value = value</span><br><span class="line">        self.leftChild = left</span><br><span class="line">        self.rightChild = right</span><br><span class="line">        self.parent = parent</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hasLeftChild</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.leftChild</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hasRightChild</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.rightChild</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isLeftChild</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.parent <span class="keyword">and</span> self.leftChild == self</span><br><span class="line">    </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">isRightChild</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> self.parent <span class="keyword">and</span> self.rightChild == self</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">isRoot</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">not</span> self.parent</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">isLeaf</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">not</span> (self.leftChild <span class="keyword">and</span> self.rightChild)</span><br><span class="line">   <span class="class"><span class="keyword">class</span> <span class="title">BST</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="string">"""docstring for BST"""</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		self.size = <span class="number">0</span></span><br><span class="line">		self.root = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">length</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> self.size</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(self,key,value)</span>:</span></span><br><span class="line">		<span class="keyword">if</span> self.root:</span><br><span class="line">			self._insert(key,value,self.root)</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			self.root = TreeNode(key,value)</span><br><span class="line">		self.size += <span class="number">1</span></span><br><span class="line">		<span class="keyword">return</span> self.root</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">_insert</span><span class="params">(self,key,value,currentNode)</span>:</span></span><br><span class="line">		<span class="keyword">if</span> key &lt; currentNode.key:</span><br><span class="line">			<span class="keyword">if</span> currentNode.hasLeftChild():</span><br><span class="line">				self._insert(key,value,currentNode.leftChild)</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				currentNode.leftChild = TreeNode(key,value,parent=currentNode)</span><br><span class="line">		<span class="keyword">elif</span> key == currentNode.key:</span><br><span class="line">			currentNode.value = value</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">if</span> currentNode.hasRightChild():</span><br><span class="line">				self._insert(key,value,currentNode.rightChild)</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				currentNode.rightChild = TreeNode(key,value,parent=currentNode)</span><br><span class="line"></span><br><span class="line"><span class="comment">#	def __setitem__(self,key,value):</span></span><br><span class="line"><span class="comment">#		self.insert(key,value)</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self,key)</span>:</span></span><br><span class="line">		<span class="keyword">if</span> self.root:</span><br><span class="line">			res = self._get(key,self.root)</span><br><span class="line">			<span class="keyword">if</span> res:</span><br><span class="line">				<span class="keyword">return</span> res.value</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">_get</span><span class="params">(self,key,currentNode)</span>:</span></span><br><span class="line">		<span class="keyword">if</span> currentNode <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">		<span class="keyword">elif</span> key == currentNode.key:</span><br><span class="line">			<span class="keyword">return</span> currentNode</span><br><span class="line">		<span class="keyword">elif</span> key &gt; currentNode.key:</span><br><span class="line">			<span class="keyword">return</span> self._get(key,currentNode.rightChild)</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">return</span> self._get(key,currentNode.leftChild)</span><br><span class="line"></span><br><span class="line"><span class="comment">#	def __getitem__(self,item):</span></span><br><span class="line"><span class="comment">#		return self.get(item)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#	def __contains__(self,item):</span></span><br><span class="line"><span class="comment">#		if self._get(item,self.root):</span></span><br><span class="line"><span class="comment">#			return True</span></span><br><span class="line"><span class="comment">#		else:</span></span><br><span class="line"><span class="comment">#			return False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	tree = BST()   <span class="comment">#类的实例化</span></span><br><span class="line">	tree.insert(<span class="number">1</span>,<span class="string">'dd'</span>)</span><br><span class="line">	tree.insert(<span class="number">2</span>,<span class="string">'d'</span>)</span><br><span class="line">	tree.insert(<span class="number">3</span>,<span class="string">'dde'</span>)</span><br><span class="line">	tree.insert(<span class="number">4</span>,<span class="string">'fafa'</span>)</span><br><span class="line">	value = tree.get(<span class="number">4</span>)</span><br><span class="line">	print(value)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Data-Structure/" rel="tag"># Data Structure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/21/链表/" rel="next" title="链表">
+                <i class="fa fa-chevron-left"></i> 链表
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/21/算法综合/" rel="prev" title="算法综合">
+                算法综合 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#树的概念"><span class="nav-number">1.</span> <span class="nav-text">树的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#树的术语"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">树的术语</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树"><span class="nav-number">2.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概念"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树的性质"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">二叉树的性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树的分类"><span class="nav-number">2.1.</span> <span class="nav-text">二叉树的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#满二叉树"><span class="nav-number">2.1.1.</span> <span class="nav-text">满二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完全二叉树"><span class="nav-number">2.1.2.</span> <span class="nav-text">完全二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉查找树（BST）"><span class="nav-number">2.1.3.</span> <span class="nav-text">二叉查找树（BST）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#性质"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入节点"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">插入节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入节点-1"><span class="nav-number">2.1.3.4.</span> <span class="nav-text">插入节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平衡二叉树"><span class="nav-number">2.1.4.</span> <span class="nav-text">平衡二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景"><span class="nav-number">2.1.4.2.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#红黑树"><span class="nav-number">2.1.5.</span> <span class="nav-text">红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#介绍"><span class="nav-number">2.1.5.0.0.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#性质-1"><span class="nav-number">2.1.5.0.0.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#红黑树的应用"><span class="nav-number">2.1.5.0.0.3.</span> <span class="nav-text">红黑树的应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树"><span class="nav-number">2.1.6.</span> <span class="nav-text">B树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树"><span class="nav-number">2.1.7.</span> <span class="nav-text">B+树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树的实现"><span class="nav-number">3.</span> <span class="nav-text">树的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的深度"><span class="nav-number">3.0.1.</span> <span class="nav-text">二叉树的深度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解法一"><span class="nav-number">3.0.1.0.1.</span> <span class="nav-text">解法一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解法二"><span class="nav-number">3.0.1.0.2.</span> <span class="nav-text">解法二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的遍历"><span class="nav-number">3.0.2.</span> <span class="nav-text">二叉树的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树的创建及遍历"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">二叉树的创建及遍历</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的重建"><span class="nav-number">3.0.3.</span> <span class="nav-text">二叉树的重建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.0.4.</span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉排序树"><span class="nav-number">3.0.5.</span> <span class="nav-text">二叉排序树</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

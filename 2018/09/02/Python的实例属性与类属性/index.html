@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="申明:  此文章引用于:https://segmentfault.com/a/1190000002671941 123456789101112131415class Animal(object):    number = 1    # situation 1animal1 = Animal()animal2 = Animal()print(animal1.number,animal2.number">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python的实例属性与类属性">
+<meta property="og:url" content="http://yoursite.com/2018/09/02/Python的实例属性与类属性/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="申明:  此文章引用于:https://segmentfault.com/a/1190000002671941 123456789101112131415class Animal(object):    number = 1    # situation 1animal1 = Animal()animal2 = Animal()print(animal1.number,animal2.number">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-11T06:50:18.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python的实例属性与类属性">
+<meta name="twitter:description" content="申明:  此文章引用于:https://segmentfault.com/a/1190000002671941 123456789101112131415class Animal(object):    number = 1    # situation 1animal1 = Animal()animal2 = Animal()print(animal1.number,animal2.number">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/02/Python的实例属性与类属性/">
+
+
+
+
+
+  <title>Python的实例属性与类属性 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/Python的实例属性与类属性/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python的实例属性与类属性</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-02T16:16:10+08:00">
+                2018-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>申明:</strong>  此文章引用于:<a href="https://segmentfault.com/a/1190000002671941" target="_blank" rel="noopener">https://segmentfault.com/a/1190000002671941</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    number = <span class="number">1</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># situation 1</span></span><br><span class="line">animal1 = Animal()</span><br><span class="line">animal2 = Animal()</span><br><span class="line">print(animal1.number,animal2.number,Animal.number)</span><br><span class="line"></span><br><span class="line"><span class="comment"># situation 2</span></span><br><span class="line">animal1.number += <span class="number">2</span></span><br><span class="line">print(animal1.number,animal2.number,Animal.number)</span><br><span class="line"></span><br><span class="line"><span class="comment"># situation 3</span></span><br><span class="line">Animal.number += <span class="number">3</span></span><br><span class="line">print(animal1.number,animal2.number,Animal.number)</span><br></pre></td></tr></table></figure>
+<p><strong>situation1</strong>：1 1 1<br><strong>situation2</strong>：3 1 1<br><strong>situation3</strong>：3 4 4</p>
+<p> <code>number</code>属性被称为类属性，既然是类属性，那么根据从<code>C++/Java</code>这种静态语言使用的经验来判断，类属性应该是为其实例所共享的。很自然的，既然是共享关系，那么从类的层次改变<code>number</code>的值，自然其实例的<code>number</code>的值也要跟着变化了。 可是情形3的情况却说明，上面的说法是错的。 错哪里呢？ 要从Python的类属性讲起。</p>
+<h4 id="Python类的属性"><a href="#Python类的属性" class="headerlink" title="Python类的属性"></a>Python类的属性</h4><p>Python属于动态强类型的语言，在很多地方和静态语言不同，因此，不能把静态语言的规则套到动态语言上来。其中，类属性就是一个很好的例子。</p>
+<p>对于属性，我们通常采用<strong>类.属性</strong>或<strong>实例.属性</strong>的形式调用。</p>
+<h4 id="Python中属性的设置"><a href="#Python中属性的设置" class="headerlink" title="Python中属性的设置"></a>Python中属性的设置</h4><p>对于属性的设置我们通常采用<strong>类.属性 = 值</strong>或<strong>实例.属性 = 值</strong>的形式<br>例如<code>animal1.number = 1</code></p>
+<p>上例中<code>animal1.number += 2</code>等价于<code>animal1.number = animal.number + 2</code>，这句话包含了<strong>属性获取</strong>及<strong>属性设置</strong>两个操作</p>
+<p>OK，重点来了，<strong>Python中属性的获取和设置的机制与静态语言是不同的</strong>，正是背后机制的不同，导致了<strong>Python中类属性不一定是为其实例所共享的</strong></p>
+<h4 id="Python中属性的查找机制"><a href="#Python中属性的查找机制" class="headerlink" title="Python中属性的查找机制"></a>Python中属性的查找机制</h4><p>Python中属性的获取存在一个向上查找机制，还是拿上面的例子做说明： Python中一切皆对象，<code>Aniaml</code>属于类对象<strong>，<code>animal1</code>属于</strong>实例对象，从对象的角度来看，<code>Animal</code>与<code>animal1</code>是两个无关的对象，但是，Python通过下面的查找树建立了类对象<code>AAA</code>与实例对象<code>obj1</code>、<code>obj2</code>之间的关系。 如图所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">      Animal</span><br><span class="line">         |</span><br><span class="line">   ---------------</span><br><span class="line">  |              |</span><br><span class="line">animal1       animal2</span><br></pre></td></tr></table></figure>
+<p>当调用Animal.number时，直接从Animal获取其属性number</p>
+<p>但是情形1中调用<code>animal1.number</code>时，Python按照从<code>animal1</code>到<code>Animal</code>的顺序由下到上查找属性<code>number</code>。 值得注意的这时候<strong>animal1</strong>是没有属性<strong>number</strong>的，于是，Python到类<code>Animal</code>中去查找，成功找到，并显示出来。所以，从现象上来看，<code>Animal</code>的属性<code>number</code>确实是<strong>共享</strong>给其所有实例的，虽然这里只是从查找树的形式模拟了其关系。</p>
+<h4 id="Python中的属性设置"><a href="#Python中的属性设置" class="headerlink" title="Python中的属性设置"></a>Python中的属性设置</h4><p>上面我们指出<code>animal1.number += 2</code>包含了<strong>属性获取</strong>及<strong>属性设置</strong>两个操作。</p>
+<p>即<code>animal1.number += 2</code>等价于<code>animal1.number = animal1.number + 2</code>。</p>
+<p> 其中等式右侧的<code>animal1.number</code>属于<strong>属性获取</strong>，其规则是按照上面提到的查找规则进行，即，这时候，获取到的是<code>Animal</code>的属性<code>number</code>，所以等式左侧的值为<code>3</code>。</p>
+<p> 第二个操作是<strong>属性设置</strong>，即<code>animal1.number = 3</code>。<strong>当发生属性设置的时候，animal1这个实例对象没有属性，因此会为自身动态添加一个属性number</strong>。 由于<strong>从对象的角度，类对象和实例对象属于两个独立的对象</strong>，所以，这个<code>number</code>属性只属于<code>animal1</code>，也就是说，这时候类对象<code>Animal</code>和实例对象<code>animal1</code>各自有一个属性<code>number</code>。</p>
+<p> 那么，在情形3中，再次调用<code>animal1.number</code>时，按照属性调用查找规则，这个时候获取到的是实例对象<code>animal1</code>的属性<code>number</code>，而不是类对象<code>Animal</code>的属性<code>number</code>。</p>
+<h4 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h4><ol>
+<li>Python中属性的获取是按照从下到上的顺序来查找顺序</li>
+<li>Python中的类和实例是两个完全独立的对象</li>
+<li>Python中的属性设置是针对对象本身进行的</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/02/面向对象编程/" rel="next" title="面向对象编程">
+                <i class="fa fa-chevron-left"></i> 面向对象编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/02/Python中-name-main-作用/" rel="prev" title="Python中__name__==__main__作用">
+                Python中__name__==__main__作用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python类的属性"><span class="nav-number">1.</span> <span class="nav-text">Python类的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python中属性的设置"><span class="nav-number">2.</span> <span class="nav-text">Python中属性的设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python中属性的查找机制"><span class="nav-number">3.</span> <span class="nav-text">Python中属性的查找机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python中的属性设置"><span class="nav-number">4.</span> <span class="nav-text">Python中的属性设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题总结"><span class="nav-number">5.</span> <span class="nav-text">问题总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

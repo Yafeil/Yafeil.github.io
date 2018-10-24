@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="interview,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="存储过程我们常用的操作数据库语言SQL语句在执行的时候需要要先编译，然后执行，而存储过程（Stored Procedure）是一组为了完成特定功能的SQL语句集，经编译后存储在数据库中，用户通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行它。 一个存储过程是一个可编程的函数，它在数据库中创建并保存。它可以有SQL语句和一些特殊的控制结构组成。当希望在不同的应用程序或平台上执行相">
+<meta name="keywords" content="interview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库">
+<meta property="og:url" content="http://yoursite.com/2018/08/20/数据库/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="存储过程我们常用的操作数据库语言SQL语句在执行的时候需要要先编译，然后执行，而存储过程（Stored Procedure）是一组为了完成特定功能的SQL语句集，经编译后存储在数据库中，用户通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行它。 一个存储过程是一个可编程的函数，它在数据库中创建并保存。它可以有SQL语句和一些特殊的控制结构组成。当希望在不同的应用程序或平台上执行相">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180905/4DEa281g5I.png?imageslim">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180905/Kle6le18h0.png?imageslim">
+<meta property="og:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180905/J52dJclme2.png?imageslim">
+<meta property="og:updated_time" content="2018-09-25T06:52:11.950Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库">
+<meta name="twitter:description" content="存储过程我们常用的操作数据库语言SQL语句在执行的时候需要要先编译，然后执行，而存储过程（Stored Procedure）是一组为了完成特定功能的SQL语句集，经编译后存储在数据库中，用户通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行它。 一个存储过程是一个可编程的函数，它在数据库中创建并保存。它可以有SQL语句和一些特殊的控制结构组成。当希望在不同的应用程序或平台上执行相">
+<meta name="twitter:image" content="http://pdfwkfvkg.bkt.clouddn.com/blog/180905/4DEa281g5I.png?imageslim">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/20/数据库/">
+
+
+
+
+
+  <title>数据库 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/20/数据库/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-20T15:35:29+08:00">
+                2018-08-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index">
+                    <span itemprop="name">Database</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h3><p>我们常用的操作数据库语言SQL语句在执行的时候需要要先编译，然后执行，<strong>而存储过程（Stored Procedure）是一组为了完成特定功能的SQL语句集</strong>，经编译后存储在数据库中，用户通过指定存储过程的名字并给定参数（如果该存储过程带有参数）来调用执行它。</p>
+<p>一个存储过程是一个可编程的函数，它在数据库中创建并保存。它可以有SQL语句和一些特殊的控制结构组成。当希望在不同的应用程序或平台上执行相同的函数，或者封装特定功能时，存储过程是非常有用的。数据库中的存储过程可以看做是对编程中面向对象方法的模拟。它允许控制数据的访问方式。</p>
+<p>存储过程通常有以下优点：</p>
+<p>(1).存储过程增强了SQL语言的功能和灵活性。存储过程可以用流控制语句编写，有很强的灵活性，可以完成复杂的判断和较复杂的运算。</p>
+<p>(2).存储过程允许标准组件是编程。存储过程被创建后，可以在程序中被多次调用，而不必重新编写该存储过程的SQL语句。而且数据库专业人员可以随时对存储过程进行修改，对应用程序源代码毫无影响。</p>
+<p>(3).存储过程能实现较快的执行速度。如果某一操作包含大量的Transaction-SQL代码或分别被多次执行，那么存储过程要比批处理的执行速度快很多。因为存储过程是预编译的。在首次运行一个存储过程时查询，优化器对其进行分析优化，并且给出最终被存储在系统表中的执行计划。而批处理的Transaction-SQL语句在每次运行时都要进行编译和优化，速度相对要慢一些。</p>
+<p>(4).存储过程能过减少网络流量。针对同一个数据库对象的操作（如查询、修改），如果这一操作所涉及的Transaction-SQL语句被组织程存储过程，那么当在客户计算机上调用该存储过程时，网络中传送的只是该调用语句，从而大大增加了网络流量并降低了网络负载。</p>
+<p>(5).存储过程可被作为一种安全机制来充分利用。系统管理员通过执行某一存储过程的权限进行限制，能够实现对相应的数据的访问权限的限制，避免了非授权用户对数据的访问，保证了数据的安全。</p>
+<h3 id="SQL语言"><a href="#SQL语言" class="headerlink" title="SQL语言"></a>SQL语言</h3><p>对数据库进行查询和修改操作的语言叫做SQL。</p>
+<p>SQL包含以下4个部分。</p>
+<ol>
+<li>数据定义语言(DDL): DROP, CREATE, ALTER等语句</li>
+<li>数据擦操作语言(DML): INSERT(插入)， UPDATE(修改)，DELETE(删除)语句</li>
+<li>数据查询语言(DQL): SELECT</li>
+<li>数据控制语言(DCL): GRANT, REVOKE,COMMIT, ROLLBACK等语句</li>
+</ol>
+<h3 id="数据库的锁"><a href="#数据库的锁" class="headerlink" title="数据库的锁"></a>数据库的锁</h3><h4 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h4><p><strong>锁</strong>是网络数据库中非常重要的概念，当多个用户同时对数据库并发操作时，会带来数据的不一致问题，所以，锁主要用于多用户环境中保证数据完整性和一致性。</p>
+<p>数据库锁出现的目的：<strong>处理并发问题</strong></p>
+<p>并发控制的主要采取手段有：乐观锁、悲观锁和时间戳</p>
+<h4 id="锁分类"><a href="#锁分类" class="headerlink" title="锁分类"></a>锁分类</h4><p>从数据库系统的角度分为三种：排它锁、共享锁、更新锁</p>
+<p>从程序员的角度分为两种：一种是乐观锁、一种是悲观锁</p>
+<h4 id="悲观锁-Pessimistic-Lock"><a href="#悲观锁-Pessimistic-Lock" class="headerlink" title="悲观锁(Pessimistic Lock)"></a>悲观锁(Pessimistic Lock)</h4><p>顾名思义，很悲观，每次去拿数据的时候都被认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人拿这个数据就会被block(阻塞)，直到它拿到锁。</p>
+<p>传统的关系型数据库里用到了很多这种锁机制，比如行锁、表锁、读锁、写锁等，都是在操作之前先上锁。</p>
+<h4 id="悲观锁按性质划分"><a href="#悲观锁按性质划分" class="headerlink" title="悲观锁按性质划分"></a>悲观锁按性质划分</h4><h5 id="共享锁（Share-Lock）"><a href="#共享锁（Share-Lock）" class="headerlink" title="共享锁（Share Lock）"></a>共享锁（Share Lock）</h5><p>S锁，也叫读锁，用于所有的只读数据操作。共享锁是非独占的，允许多个并发事务读取其锁定的资源。</p>
+<p><strong>性质：</strong></p>
+<ol>
+<li>多个事务可封锁同一个共享页；</li>
+<li>任何事务都不能修改该页</li>
+<li>通常是该页被读取完毕，S锁立即被释放</li>
+</ol>
+<h5 id="排它锁（Exclusive-Lock）"><a href="#排它锁（Exclusive-Lock）" class="headerlink" title="排它锁（Exclusive Lock）"></a>排它锁（Exclusive Lock）</h5><p>X锁，也叫写锁，表示对数据进行写操作。如果一个事务对对象加了排它锁，其它事务就不能再给他加任何锁了。</p>
+<p><strong>性质</strong>：</p>
+<ol>
+<li>仅允许一个事务封锁此页</li>
+<li>其他任何事务必须等释放才能对该页进行访问</li>
+<li>X锁一直到事务结束才能释放</li>
+</ol>
+<h5 id="更新锁"><a href="#更新锁" class="headerlink" title="更新锁"></a>更新锁</h5><p>U锁，在修改操作的初始化阶段用来锁定可能要被修改的资源，这样可以避免使用共享锁造成的死锁现象。</p>
+<p><strong>性质：</strong></p>
+<ol>
+<li>用来预定要对此页施加X锁，它允许其它事务读，但不允许在施加U锁或X锁</li>
+<li>当被读取的页要被更新时，则升级为X锁；</li>
+<li>U锁一直到事务结束才能被释放</li>
+</ol>
+<p><strong>悲观锁按作用范围划分为：</strong>行锁、表锁</p>
+<p><strong>行锁：</strong></p>
+<p>锁的作用范围是行级别</p>
+<p><strong>表锁：</strong></p>
+<p>锁的作用范围是整张表</p>
+<h4 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h4><p>顾明思义，就是很乐观，每次去拿数据的时候都被认为别人不会修改。所以，不会上锁。但是在更新的时候会判断一下此期间有没有人更新这个数据，可以使用版本号等机制。</p>
+<p>乐观锁适用于多读写少的应用场景，这样可以提高吞吐量，像数据库如果提供类似write_condition机制的其实都是提供的乐观锁。</p>
+<h5 id="乐观锁的实现方式"><a href="#乐观锁的实现方式" class="headerlink" title="乐观锁的实现方式"></a>乐观锁的实现方式</h5><ul>
+<li>版本号（version）</li>
+</ul>
+<blockquote>
+<p><strong>版本号（记为version）</strong>：就是给数据增加一个版本标识，在数据库上就是表中增加一个version字段，每次更新把这个字段加1，读取数据的时候把version读出来，更新的时候比较version，如果还是开始读取的version就可以更新了，如果现在的version比老的version大，说明有其他事务更新了该数据，并增加了版本号，这时候得到一个无法更新的通知，用户自行根据这个通知来决定怎么处理，比如重新开始一遍。这里的关键是判断version和更新两个动作需要作为一个原子单元执行，否则在你判断可以更新以后正式更新之前有别的事务修改了version，这个时候你再去更新就可能会覆盖前一个事务做的更新，造成第二类丢失更新，所以你可以使用update … where … and version=”old version”这样的语句，根据返回结果是0还是非0来得到通知，如果是0说明更新没有成功，因为version被改了，如果返回非0说明更新成功。</p>
+</blockquote>
+<ul>
+<li><p>时间戳（使用数据库服务器的时间戳）</p>
+<blockquote>
+<p><strong>时间戳（timestamp）</strong>：和版本号基本一样，只是通过时间戳来判断而已，注意时间戳要使用数据库服务器的时间戳不能是业务系统的时间。</p>
+</blockquote>
+</li>
+<li><p>待更新字段</p>
+<blockquote>
+<p><strong>待更新字段</strong>：和版本号方式相似，只是不增加额外字段，直接使用有效数据字段做版本控制信息，因为有时候我们可能无法改变旧系统的数据库表结构。假设有个待更新字段叫count,先去读取这个count,更新的时候去比较数据库中count的值是不是我期望的值（即开始读的值），如果是就把我修改的count的值更新到该字段，否则更新失败。java的基本类型的原子类型对象如AtomicInteger就是这种思想。</p>
+</blockquote>
+</li>
+<li><p>所有字段</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>所有字段</strong>：和待更新字段类似，只是使用所有字段做版本控制信息，只有所有字段都没变化才会执行更新。</p>
+</blockquote>
+<h3 id="数据库索引为什么用B树？原理是啥"><a href="#数据库索引为什么用B树？原理是啥" class="headerlink" title="数据库索引为什么用B树？原理是啥"></a>数据库索引为什么用B树？原理是啥</h3><h3 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h3><h4 id="什么是事务-transaction"><a href="#什么是事务-transaction" class="headerlink" title="什么是事务- transaction"></a>什么是事务- transaction</h4><p>事务(Transaction)是并发控制的基本单位。所谓事务,它是一个操作序列；使用事务处理，通过确保成批的SQL操作要么都执行，要么都不执行，来维护数据库的完整性。例如，银行转帐工作：从一个帐号扣款并使另一个帐号增款，这两个操作要么都执行，要么都不执行。所以，应该把他们看成一个事务。事务是数据库维护数据一致性的单位，在每个事务结束时，都能保持数据一致性。 </p>
+<h4 id="事务处理的几个处理"><a href="#事务处理的几个处理" class="headerlink" title="事务处理的几个处理"></a>事务处理的几个处理</h4><ul>
+<li>事务(transaction)：指一组SQL语句</li>
+<li>回退(rollback)：指撤销指定的SQL语句的过程</li>
+<li>提交(commit)：指将未存储的SQL语句结果写入数据库表</li>
+<li>保留点(savepoint)：指事务处理中设置的零时占位符(placeholder),可以对它发布回退</li>
+</ul>
+<h4 id="数据库事务的四大特性"><a href="#数据库事务的四大特性" class="headerlink" title="数据库事务的四大特性"></a>数据库事务的四大特性</h4><p>数据库事务必须具备ACID特性，Atomic(原子性)，Consistency(一致性)，Isolation(隔离性)和Durability(持久性)：</p>
+<ul>
+<li>原子性：指整个数据库事务是不可分割的工作单位。事务中的操作要么发生，要么没发生，不存在发生一半的情况</li>
+<li>一致性：一致性也称为完整性。一个事务在执行后，数据库必须从一个一致性状态转变为另一个一致性状态。</li>
+<li>隔离性：指的是在并发环境中，当不同的事务同时操纵相同的数据时，每个事务都有自己各自完整的数据空间，互不干扰</li>
+<li>持久性：指的是只要事务成功结束，它对数据库所做的更新就必须永久保存下来</li>
+</ul>
+<h3 id="数据库的隔离级别"><a href="#数据库的隔离级别" class="headerlink" title="数据库的隔离级别"></a>数据库的隔离级别</h3><h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h4><h5 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h5><p>所谓脏读就是指一个事务中访问到了另外一个事务中未提交的数据，如下：</p>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180905/4DEa281g5I.png?imageslim" alt="mark"></p>
+<p>如上图开启两个会话来模拟两个线程同时去访问数据库表table中id=1的记录，假设两个会话开启前数据库中table表中id=1的记录行里面的列age值为5。会话1和2一开始都开启了显示的事务（只有执行commit命令才会提交数据的修改），会话2首先更新了table中id=1的记录行的age列的值为10（更新前值为5），在会话2执行commit提交前，会话1通过select语句查询id=1的记录行中age列的值，这时候如果存在脏读，则会话1读取到的age的值是10而不是5了，虽然会话2的更新还没有提交。那么脏读存在什么问题那?如果会话2最后提交了，那么会话1虽然在会话2还没提交就读取到了修改的值，但是也没什么影响；但是如果会话1读取到会话2没有提交的数据后，会话2执行了rollback，也就是没有把修改刷新到数据库，但是会话1已经使用了修改的数据，这就出现了错误。</p>
+<h5 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h5><p>所谓不可重复读是指在一个事务内根据同一个条件对记录进行多次查询，但是搜出来的结果却不一致。发生不可重复读的原因是在多次搜索期间查询条件覆盖的数据被其他事务修改了，如图：</p>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180905/Kle6le18h0.png?imageslim" alt="mark"></p>
+<p>如上图假设数据库表table里面id=1的记录行中age列一开始值为5，然后会话1和会话2分别开启了一个事务，会话1首先查询id=1的记录中age字段值为5，然后会话2修改id=1的记录中age的值为10然后提交了事务，然后会话1再次搜出id=1的记录中age的值，如果出现了不可重复读，则这时候搜出来的age的值为10而不是5。需要注意的是会话1两次查询是在同一个事务内进行的，期间事务并没有提交。不可重复读的存在显得不是那么不可容忍，毕竟读取的是已经提交了的数据。</p>
+<h5 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h5><p>所谓幻读是指同一个事务内多次查询返回的结果集不一样(比如在增加了或者减少了行记录)。比如同一个事务A内第一次查询的时候有n条记录，但是第二次同等条件下查询却有n+1条记录，这就好像产生了幻觉。其实和不可重复读一样发生幻读的原因也是另外一个事务新增或者删除或者修改了第一个事务结果集里面的数据。不同在于不可重复读是同一个记录内容被改变了。幻读是数据行记录变多了或者变少了。</p>
+<p><img src="http://pdfwkfvkg.bkt.clouddn.com/blog/180905/J52dJclme2.png?imageslim" alt="mark"></p>
+<p>如上图假设表table里面一开始有一个id=3的记录，会话1首先开启了一个事务，然后查找id&gt;2的记录，会发现结果只有一个记录，然后会话2开启事务插入了id=5的一个记录，然后提交。这时候会话1再次查找id&gt;2的记录，如果存在幻读，则这时候会话1会看到两条记录。</p>
+<p>注：脏读是指一个事务读取到了其他事务没有提交的数据，不可重复读是指一个事务内多次根据同一个查询条件查询出来的同一行记录的值不一样，幻读是指一个事务内多次根据同个条件查出来的记录行数不一样。为了解决事务并发带来的问题，才有了事务规范中的四个事务隔离级别，不同隔离级别对上面问题部分或者全部做了避免。</p>
+<h4 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h4><p>数据库事务的隔离级别有4个，由高到低依次为Read Uncommitted, Read committed, Repeatable read, Serializable这四个级别可以逐个解决脏读、不可重复读、幻读这几类问题。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">脏读</th>
+<th style="text-align:center">不可重复读</th>
+<th style="text-align:center">幻读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read uncommitted</td>
+<td style="text-align:center">可能出现</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">可能出现</td>
+</tr>
+<tr>
+<td>Read committed</td>
+<td style="text-align:center">不会出现</td>
+<td style="text-align:center">可能出现</td>
+<td style="text-align:center">可能出现</td>
+</tr>
+<tr>
+<td>Repeatable read</td>
+<td style="text-align:center">不会出现</td>
+<td style="text-align:center">不会出现</td>
+<td style="text-align:center">可能出现</td>
+</tr>
+<tr>
+<td>Serializable</td>
+<td style="text-align:center">不会出现</td>
+<td style="text-align:center">不会出现</td>
+<td style="text-align:center">不会出现</td>
+</tr>
+</tbody>
+</table>
+<h5 id="Read-uncommitted-读未提交"><a href="#Read-uncommitted-读未提交" class="headerlink" title="Read uncommitted 读未提交"></a>Read uncommitted 读未提交</h5><p>公司发工资了，领导把5000元打到singo的账号上，但是该事务并未提交，而singo正好去查看账户，发现工资已经到账，是5000元整，非常高 兴。可是不幸的是，领导发现发给singo的工资金额不对，是2000元，于是迅速回滚了事务，修改金额后，将事务提交，最后singo实际的工资只有 2000元，singo空欢喜一场。</p>
+<p>出现上述情况，即我们所说的脏读 ，两个并发的事务，“事务A：领导给singo发工资”、“事务B：singo查询工资账户”，事务B读取了事务A尚未提交的数据。</p>
+<p>当隔离级别设置为Read uncommitted 时，就可能出现脏读，如何避免脏读，请看下一个隔离级别。</p>
+<h5 id="Read-committed-读提交"><a href="#Read-committed-读提交" class="headerlink" title="Read committed 读提交"></a>Read committed 读提交</h5><p>singo拿着工资卡去消费，系统读取到卡里确实有2000元，而此时她的老婆也正好在网上转账，把singo工资卡的2000元转到另一账户，并在 singo之前提交了事务，当singo扣款时，系统检查到singo的工资卡已经没有钱，扣款失败，singo十分纳闷，明明卡里有钱，为 何……</p>
+<p>出现上述情况，即我们所说的不可重复读 ，两个并发的事务，“事务A：singo消费”、“事务B：singo的老婆网上转账”，事务A事先读取了数据，事务B紧接了更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了改变。</p>
+<p>当隔离级别设置为Read committed 时，避免了脏读，但是可能会造成不可重复读。</p>
+<p>大多数数据库的默认级别就是Read committed，比如Sql Server , Oracle。如何解决不可重复读这一问题，请看下一个隔离级别。</p>
+<h5 id="Repeatable-read-重复读"><a href="#Repeatable-read-重复读" class="headerlink" title="Repeatable read 重复读"></a>Repeatable read 重复读</h5><p>当隔离级别设置为Repeatable read 时，可以避免不可重复读。当singo拿着工资卡去消费时，一旦系统开始读取工资卡信息（即事务开始），singo的老婆就不可能对该记录进行修改，也就是singo的老婆不能在此时转账。</p>
+<p>虽然Repeatable read避免了不可重复读，但还有可能出现幻读 。</p>
+<p>singo的老婆工作在银行部门，她时常通过银行内部系统查看singo的信用卡消费记录。有一天，她正在查询到singo当月信用卡的总消费金额 （select sum(amount) from transaction where month = 本月）为80元，而singo此时正好在外面胡吃海塞后在收银台买单，消费1000元，即新增了一条1000元的消费记录（insert transaction … ），并提交了事务，随后singo的老婆将singo当月信用卡消费的明细打印到A4纸上，却发现消费总额为1080元，singo的老婆很诧异，以为出 现了幻觉，幻读就这样产生了。</p>
+<p>注：Mysql的默认隔离级别就是Repeatable read。</p>
+<h5 id="Serializable-序列化"><a href="#Serializable-序列化" class="headerlink" title="Serializable 序列化"></a>Serializable 序列化</h5><p>Serializable 是最高的事务隔离级别，同时代价也花费最高，性能很低，一般很少使用，在该级别下，事务顺序执行，不仅可以避免脏读、不可重复读，还避免了幻像读。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/interview/" rel="tag"># interview</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/20/ARP协议/" rel="next" title="ARP协议">
+                <i class="fa fa-chevron-left"></i> ARP协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/20/DNS原理及解析过程/" rel="prev" title="DNS原理及解析过程">
+                DNS原理及解析过程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储过程"><span class="nav-number">1.</span> <span class="nav-text">存储过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL语言"><span class="nav-number">2.</span> <span class="nav-text">SQL语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的锁"><span class="nav-number">3.</span> <span class="nav-text">数据库的锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#锁"><span class="nav-number">3.1.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#锁分类"><span class="nav-number">3.2.</span> <span class="nav-text">锁分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#悲观锁-Pessimistic-Lock"><span class="nav-number">3.3.</span> <span class="nav-text">悲观锁(Pessimistic Lock)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#悲观锁按性质划分"><span class="nav-number">3.4.</span> <span class="nav-text">悲观锁按性质划分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#共享锁（Share-Lock）"><span class="nav-number">3.4.1.</span> <span class="nav-text">共享锁（Share Lock）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#排它锁（Exclusive-Lock）"><span class="nav-number">3.4.2.</span> <span class="nav-text">排它锁（Exclusive Lock）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更新锁"><span class="nav-number">3.4.3.</span> <span class="nav-text">更新锁</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#乐观锁"><span class="nav-number">3.5.</span> <span class="nav-text">乐观锁</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#乐观锁的实现方式"><span class="nav-number">3.5.1.</span> <span class="nav-text">乐观锁的实现方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库索引为什么用B树？原理是啥"><span class="nav-number">4.</span> <span class="nav-text">数据库索引为什么用B树？原理是啥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务处理"><span class="nav-number">5.</span> <span class="nav-text">事务处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是事务-transaction"><span class="nav-number">5.1.</span> <span class="nav-text">什么是事务- transaction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事务处理的几个处理"><span class="nav-number">5.2.</span> <span class="nav-text">事务处理的几个处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库事务的四大特性"><span class="nav-number">5.3.</span> <span class="nav-text">数据库事务的四大特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的隔离级别"><span class="nav-number">6.</span> <span class="nav-text">数据库的隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#名词解释"><span class="nav-number">6.1.</span> <span class="nav-text">名词解释</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#脏读"><span class="nav-number">6.1.1.</span> <span class="nav-text">脏读</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不可重复读"><span class="nav-number">6.1.2.</span> <span class="nav-text">不可重复读</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幻读"><span class="nav-number">6.1.3.</span> <span class="nav-text">幻读</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隔离级别"><span class="nav-number">6.2.</span> <span class="nav-text">隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Read-uncommitted-读未提交"><span class="nav-number">6.2.1.</span> <span class="nav-text">Read uncommitted 读未提交</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Read-committed-读提交"><span class="nav-number">6.2.2.</span> <span class="nav-text">Read committed 读提交</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Repeatable-read-重复读"><span class="nav-number">6.2.3.</span> <span class="nav-text">Repeatable read 重复读</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Serializable-序列化"><span class="nav-number">6.2.4.</span> <span class="nav-text">Serializable 序列化</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

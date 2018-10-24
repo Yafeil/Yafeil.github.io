@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="const 限定符修饰基本数据类型修饰一般常量及数组const int a=10    或者   int const a=10 修饰指针变量*指针: 是用来指向实际内存地址的变量 引用: 是其相应变量的别名 当使用带有const的指针的时候其实有两个意思。一种是你不能修改指针本身的内容，另一种是你不能修改指针指向的内容。  指针指向的内容不能更改 const int* p（推荐）   或者  in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="const限定符总结">
+<meta property="og:url" content="http://yoursite.com/2018/08/20/C++的const用法总结/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="const 限定符修饰基本数据类型修饰一般常量及数组const int a=10    或者   int const a=10 修饰指针变量*指针: 是用来指向实际内存地址的变量 引用: 是其相应变量的别名 当使用带有const的指针的时候其实有两个意思。一种是你不能修改指针本身的内容，另一种是你不能修改指针指向的内容。  指针指向的内容不能更改 const int* p（推荐）   或者  in">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-09T01:01:08.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="const限定符总结">
+<meta name="twitter:description" content="const 限定符修饰基本数据类型修饰一般常量及数组const int a=10    或者   int const a=10 修饰指针变量*指针: 是用来指向实际内存地址的变量 引用: 是其相应变量的别名 当使用带有const的指针的时候其实有两个意思。一种是你不能修改指针本身的内容，另一种是你不能修改指针指向的内容。  指针指向的内容不能更改 const int* p（推荐）   或者  in">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/20/C++的const用法总结/">
+
+
+
+
+
+  <title>const限定符总结 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/20/C++的const用法总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">const限定符总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-20T07:35:27+08:00">
+                2018-08-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="const-限定符"><a href="#const-限定符" class="headerlink" title="const 限定符"></a>const 限定符</h3><h4 id="修饰基本数据类型"><a href="#修饰基本数据类型" class="headerlink" title="修饰基本数据类型"></a>修饰基本数据类型</h4><h5 id="修饰一般常量及数组"><a href="#修饰一般常量及数组" class="headerlink" title="修饰一般常量及数组"></a>修饰一般常量及数组</h5><p><code>const int a=10</code>    或者   <code>int const a=10</code></p>
+<h5 id="修饰指针变量"><a href="#修饰指针变量" class="headerlink" title="修饰指针变量*"></a>修饰指针变量*</h5><p><strong>指针</strong>: 是用来指向实际内存地址的变量</p>
+<p><strong>引用</strong>: 是其相应变量的别名</p>
+<p>当使用带有const的指针的时候其实有两个意思。一种是你不能修改指针本身的内容，另一种是你不能修改指针指向的内容。</p>
+<ol>
+<li><p>指针指向的内容不能更改</p>
+<p><code>const int* p（推荐）</code>   或者  <code>int const* p</code></p>
+</li>
+<li><p>指针本身的值不能更改</p>
+<p><code>int* const p=&amp;address</code></p>
+</li>
+<li><p>指针本身和它指向对的内容都不能更改</p>
+<p><code>const int* const p=&amp;address</code></p>
+</li>
+</ol>
+<h5 id="修饰引用-amp"><a href="#修饰引用-amp" class="headerlink" title="修饰引用(&amp;)"></a>修饰引用(&amp;)</h5><p><code>int const &amp;a=x</code>  或者  <code>const int &amp;a=x</code></p>
+<p>这两种定义方式是等价的，但是此时引用a不能被更新。如a++是错误的</p>
+<h3 id="define与const的区别"><a href="#define与const的区别" class="headerlink" title="define与const的区别"></a>define与const的区别</h3><p>c++中不但可以使用<code>define</code>定义常量还可以用<code>const</code>定义常量，区别如下：</p>
+<ul>
+<li>用<code>define Max 255</code>定义的常量是没有类型的，所给出的是一个立即数，编译器只是把所定义的常量值与所定义的常量的名字联系起来，define所定义的宏变量在预处理的时候进行替换，在程序中使用到该常量的地方首要进行拷贝替换</li>
+<li>用<code>const float MAX = 255</code>定义的常量有类型的名字，存放在内存的静态区域中，在程序运行过程中const变量只有一个拷贝，而<code># define</code>定义的宏变量却有多个拷贝，所以宏定义在程序运行过程中所消耗的内存要比const变量的大得多</li>
+<li>用define定义的常量是不可以用指针变量去指向的，用const定义的常量是可以用指针去指向该常量的地址的</li>
+<li>用define可以定义一些简单的函数，const是不可以定义函数的</li>
+</ul>
+<p><strong>具体来说，有以下几方面的区别</strong></p>
+<ol>
+<li><p>编译器的处理方式</p>
+<p>define  在预处理阶段进行替换</p>
+<p>const   在编译运行确定其值</p>
+</li>
+<li><p>类型检查</p>
+<p>define  无类型，不进行 类型安全检查，可能会产生意想不到的错误</p>
+<p>const   有数据类型，编译时会进行类型检查</p>
+</li>
+<li><p>存储空间</p>
+<p>define  不分配内存 ，给出的是立即数，有多少次使用就进行多少次替换，在内存中会有多个拷贝，消耗内存大 </p>
+<p>const    在静态存储区中分配空间，在程序运行过程中内存中只有一个拷贝</p>
+</li>
+<li><p>其它</p>
+<p>在编译时， 编译器通常不为const常量分配存储空间，而是将它们保存在符号表中，这使得它成为一个编译期间的常量，没有了存储与读内存的操作，使得它的效率也很高。<br>宏替换只作替换，不做计算，不做表达式求解。</p>
+<p>宏定义的作用范围仅限于当前文件。<br>默认状态下，const对象只在文件内有效，当多个文件中出现了同名的const变量时，等同于在不同文件中分别定义了独立的变量。<br>如果想在多个文件之间共享const对象，必须在变量定义之前添加extern关键字（在声明和定义时都要加）</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/19/进程间的通信方式/" rel="next" title="进程间的通信方式">
+                <i class="fa fa-chevron-left"></i> 进程间的通信方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/20/管理数据内存的方式/" rel="prev" title="管理数据内存的方式">
+                管理数据内存的方式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#const-限定符"><span class="nav-number">1.</span> <span class="nav-text">const 限定符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修饰基本数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">修饰基本数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#修饰一般常量及数组"><span class="nav-number">1.1.1.</span> <span class="nav-text">修饰一般常量及数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修饰指针变量"><span class="nav-number">1.1.2.</span> <span class="nav-text">修饰指针变量*</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修饰引用-amp"><span class="nav-number">1.1.3.</span> <span class="nav-text">修饰引用(&amp;)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#define与const的区别"><span class="nav-number">2.</span> <span class="nav-text">define与const的区别</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

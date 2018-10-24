@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="静态代码块：用static声明，JVM加载类时执行，仅执行一次 构造代码块：类中直接用{}定义，每一次创建对象时执行 执行顺序优先级：静态块 &amp;gt; main() &amp;gt; 构造快 &amp;gt; 构造方法   构造函数12public HelloA()&amp;#123;    //构造函数&amp;#125; 关于构造函数，以下几点要注意：  对象一建立，就会调用与之相应的构造函数，也就是说，不建立对象，构造函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="静态代码块、构造代码块、构造函数以及Java类的初始化">
+<meta property="og:url" content="http://yoursite.com/2018/09/10/静态代码块、构造代码块、构造函数以及Java类的初始化/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="静态代码块：用static声明，JVM加载类时执行，仅执行一次 构造代码块：类中直接用{}定义，每一次创建对象时执行 执行顺序优先级：静态块 &amp;gt; main() &amp;gt; 构造快 &amp;gt; 构造方法   构造函数12public HelloA()&amp;#123;    //构造函数&amp;#125; 关于构造函数，以下几点要注意：  对象一建立，就会调用与之相应的构造函数，也就是说，不建立对象，构造函">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-10T08:31:19.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="静态代码块、构造代码块、构造函数以及Java类的初始化">
+<meta name="twitter:description" content="静态代码块：用static声明，JVM加载类时执行，仅执行一次 构造代码块：类中直接用{}定义，每一次创建对象时执行 执行顺序优先级：静态块 &amp;gt; main() &amp;gt; 构造快 &amp;gt; 构造方法   构造函数12public HelloA()&amp;#123;    //构造函数&amp;#125; 关于构造函数，以下几点要注意：  对象一建立，就会调用与之相应的构造函数，也就是说，不建立对象，构造函">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/10/静态代码块、构造代码块、构造函数以及Java类的初始化/">
+
+
+
+
+
+  <title>静态代码块、构造代码块、构造函数以及Java类的初始化 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/静态代码块、构造代码块、构造函数以及Java类的初始化/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">静态代码块、构造代码块、构造函数以及Java类的初始化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-10T14:54:51+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>静态代码块：用static声明，JVM加载类时执行，仅执行一次</p>
+<p>构造代码块：类中直接用{}定义，每一次创建对象时执行</p>
+<p>执行顺序优先级：静态块 &gt; main() &gt; 构造快 &gt; 构造方法 </p>
+</blockquote>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HelloA</span><span class="params">()</span></span>&#123;    <span class="comment">//构造函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关于构造函数，以下几点要注意：</p>
+<ol>
+<li>对象一建立，就会调用与之相应的构造函数，也就是说，不建立对象，构造函数是不会运行的</li>
+<li>构造函数的作用是给对象进行初始化</li>
+<li>一个对象建立，构造函数只运行一次，而一般方法可以被该对象调用多次</li>
+</ol>
+<h3 id="构造代码块"><a href="#构造代码块" class="headerlink" title="构造代码块"></a>构造代码块</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;     <span class="comment">//构造代码块</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关于构造代码块，以下几点要注意：</p>
+<ol>
+<li>构造代码块的作用是给对象进行初始化</li>
+<li>对象一建立就运行构造代码块了，而且优于构造函数执行。这里要强调一下，有对象建立，才会运行构造代码块，类是不能调用构造代码块的，而且构造代码块的执行顺序是先于构造函数执行的。</li>
+<li>构造代码块与构造函数的区别是：构造代码块是给所有对象进行统一初始化，而构造函数是给对应的对象初始化，因为构造函数是可以多个的，运行哪个构造函数就会建立什么样的对象，但无论建立哪个对象，都会先执行相同的构造代码块。也就是说，构造代码块中定义的是不同对象共性的初始化内容。</li>
+</ol>
+<h3 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span>&#123;    <span class="comment">//静态代码块</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关于静态代码块，要注意的是：</p>
+<ol>
+<li>它是随着类的加载而执行，只执行一次，并优先于主函数。具体说，<strong>静态代码块是由类调用</strong>的。类调用时，先执行静态代码块，然后才执行主函数的。</li>
+<li><strong>静态代码块其实就是给类初始化的，而构造代码块是给对象初始化的</strong>。</li>
+<li>静态代码块中的变量是局部变量，与普通函数中的局部变量性质没有区别</li>
+<li>一个类中可以有多个静态代码块</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">staitc <span class="keyword">int</span> cnt=<span class="number">6</span>;</span><br><span class="line"><span class="keyword">static</span>&#123;</span><br><span class="line">      cnt+=<span class="number">9</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      System.out.println(cnt);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span>&#123;</span><br><span class="line">      cnt/=<span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">运行结果：</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h3 id="Java类初始化顺序"><a href="#Java类初始化顺序" class="headerlink" title="Java类初始化顺序"></a>Java类初始化顺序</h3><h4 id="对于一个类的情况"><a href="#对于一个类的情况" class="headerlink" title="对于一个类的情况"></a>对于一个类的情况</h4><p><strong>例1</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloA</span><span class="params">()</span></span>&#123;<span class="comment">//构造函数</span></span><br><span class="line">        System.out.println(<span class="string">"A的构造函数"</span>);    </span><br><span class="line">    &#125;</span><br><span class="line">    &#123;<span class="comment">//构造代码块</span></span><br><span class="line">        System.out.println(<span class="string">"A的构造代码块"</span>);    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> &#123;<span class="comment">//静态代码块</span></span><br><span class="line">        System.out.println(<span class="string">"A的静态代码块"</span>);        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">运行结果：</span><br><span class="line">A的静态代码块</span><br></pre></td></tr></table></figure>
+<p><strong>例2</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloA</span><span class="params">()</span></span>&#123;<span class="comment">//构造函数</span></span><br><span class="line">        System.out.println(<span class="string">"A的构造函数"</span>);    </span><br><span class="line">    &#125;</span><br><span class="line">    &#123;<span class="comment">//构造代码块</span></span><br><span class="line">        System.out.println(<span class="string">"A的构造代码块"</span>);    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> &#123;<span class="comment">//静态代码块</span></span><br><span class="line">        System.out.println(<span class="string">"A的静态代码块"</span>);        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        HelloA a=<span class="keyword">new</span> HelloA();    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">A的静态代码块</span><br><span class="line">A的构造代码块</span><br><span class="line">A的构造函数</span><br></pre></td></tr></table></figure>
+<p><strong>例3</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloA</span><span class="params">()</span></span>&#123;<span class="comment">//构造函数</span></span><br><span class="line">        System.out.println(<span class="string">"A的构造函数"</span>);    </span><br><span class="line">    &#125;</span><br><span class="line">    &#123;<span class="comment">//构造代码块</span></span><br><span class="line">        System.out.println(<span class="string">"A的构造代码块"</span>);    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> &#123;<span class="comment">//静态代码块</span></span><br><span class="line">        System.out.println(<span class="string">"A的静态代码块"</span>);        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        HelloA a=<span class="keyword">new</span> HelloA();</span><br><span class="line">        HelloA b=<span class="keyword">new</span> HelloA();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">A的静态代码块</span><br><span class="line">A的构造代码块</span><br><span class="line">A的构造函数</span><br><span class="line">A的构造代码块</span><br><span class="line">A的构造函数</span><br></pre></td></tr></table></figure>
+<p><strong>例4</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InitialOrderTest</span> </span>&#123;</span><br><span class="line">        <span class="comment">/* 静态变量 */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String staticField = <span class="string">"静态变量"</span>;</span><br><span class="line">        <span class="comment">/* 变量 */</span></span><br><span class="line">    <span class="keyword">public</span> String field = <span class="string">"变量"</span>;</span><br><span class="line">        <span class="comment">/* 静态初始化块 */</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println( staticField );</span><br><span class="line">        System.out.println( <span class="string">"静态初始化块"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="comment">/* 初始化块 */</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println( field );</span><br><span class="line">        System.out.println( <span class="string">"初始化块"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="comment">/* 构造器 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">InitialOrderTest</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println( <span class="string">"构造器"</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args )</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> InitialOrderTest();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">------------------------------------------------------------------------------------运行以上代码，可以得到以下输出结果：</span><br><span class="line"><span class="number">1</span>. 静态变量</span><br><span class="line"><span class="number">2</span>. 静态初始化块</span><br><span class="line"><span class="number">3</span>. 变量</span><br><span class="line"><span class="number">4</span>. 初始化块</span><br><span class="line"><span class="number">5</span>. 构造器</span><br></pre></td></tr></table></figure>
+<h4 id="继承的情况"><a href="#继承的情况" class="headerlink" title="继承的情况"></a>继承的情况</h4><p><strong>例5</strong></p>
+<blockquote>
+<p>当涉及到继承时，按照如下顺序执行：</p>
+<ol>
+<li>执行父类的静态代码块，并初始化父类静态成员变量</li>
+<li>执行子类的静态代码块，并初始化子类静态成员变量</li>
+<li>执行父类的构造代码块，执行父类的构造函数，并初始化父类普通成员变量</li>
+<li>执行子类的构造代码块，执行子类的构造函数。并初始化子类普通成员变量</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloA</span><span class="params">()</span></span>&#123;<span class="comment">//构造函数</span></span><br><span class="line">        System.out.println(<span class="string">"A的构造函数"</span>);    </span><br><span class="line">    &#125;</span><br><span class="line">    &#123;<span class="comment">//构造代码块</span></span><br><span class="line">        System.out.println(<span class="string">"A的构造代码块"</span>);    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> &#123;<span class="comment">//静态代码块</span></span><br><span class="line">        System.out.println(<span class="string">"A的静态代码块"</span>);        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloB</span> <span class="keyword">extends</span> <span class="title">HelloA</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloB</span><span class="params">()</span></span>&#123;<span class="comment">//构造函数</span></span><br><span class="line">        System.out.println(<span class="string">"B的构造函数"</span>);    </span><br><span class="line">    &#125;</span><br><span class="line">    &#123;<span class="comment">//构造代码块</span></span><br><span class="line">        System.out.println(<span class="string">"B的构造代码块"</span>);    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> &#123;<span class="comment">//静态代码块</span></span><br><span class="line">        System.out.println(<span class="string">"B的静态代码块"</span>);        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        HelloB b=<span class="keyword">new</span> HelloB();        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">-------------------------------------运行结果：---------------------------------------</span><br><span class="line">A的静态代码块</span><br><span class="line">B的静态代码块</span><br><span class="line">A的构造代码块</span><br><span class="line">A的构造函数</span><br><span class="line">B的构造代码块</span><br><span class="line">B的构造函数</span><br></pre></td></tr></table></figure>
+<p><strong>例6</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">        <span class="comment">/* 静态变量 */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String p_StaticField = <span class="string">"父类--静态变量"</span>;</span><br><span class="line">         <span class="comment">/* 变量 */</span></span><br><span class="line">    <span class="keyword">public</span> String    p_Field = <span class="string">"父类--变量"</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span>    i    = <span class="number">9</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span>    j    = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">/* 静态初始化块 */</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println( p_StaticField );</span><br><span class="line">        System.out.println( <span class="string">"父类--静态初始化块"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="comment">/* 初始化块 */</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println( p_Field );</span><br><span class="line">        System.out.println( <span class="string">"父类--初始化块"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="comment">/* 构造器 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Parent</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println( <span class="string">"父类--构造器"</span> );</span><br><span class="line">        System.out.println( <span class="string">"i="</span> + i + <span class="string">", j="</span> + j );</span><br><span class="line">        j = <span class="number">20</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SubClass</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">         <span class="comment">/* 静态变量 */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String s_StaticField = <span class="string">"子类--静态变量"</span>;</span><br><span class="line">         <span class="comment">/* 变量 */</span></span><br><span class="line">    <span class="keyword">public</span> String s_Field = <span class="string">"子类--变量"</span>;</span><br><span class="line">        <span class="comment">/* 静态初始化块 */</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println( s_StaticField );</span><br><span class="line">        System.out.println( <span class="string">"子类--静态初始化块"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">       <span class="comment">/* 初始化块 */</span></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println( s_Field );</span><br><span class="line">        System.out.println( <span class="string">"子类--初始化块"</span> );</span><br><span class="line">    &#125;</span><br><span class="line">       <span class="comment">/* 构造器 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SubClass</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println( <span class="string">"子类--构造器"</span> );</span><br><span class="line">        System.out.println( <span class="string">"i="</span> + i + <span class="string">",j="</span> + j );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 程序入口 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args )</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println( <span class="string">"子类main方法"</span> );</span><br><span class="line">        <span class="keyword">new</span> SubClass();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">---------------------------------------结果------------------------------------------</span><br><span class="line">    父类-静态变量</span><br><span class="line">    父类--静态初始化块</span><br><span class="line">    子类--静态变量</span><br><span class="line">    子类--静态初始化块</span><br><span class="line">    子类main方法</span><br><span class="line">    父类--变量</span><br><span class="line">    父类--初始化块</span><br><span class="line">    父类--构造器</span><br><span class="line">    i=<span class="number">9</span>，j=<span class="number">0</span></span><br><span class="line">    子类--变量</span><br><span class="line">    子类--初始化块</span><br><span class="line">    子类--构造器</span><br><span class="line">    i=<span class="number">9</span>,j=<span class="number">20</span></span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong> 引自：<a href="https://www.cnblogs.com/Qian123/p/5713440.html" target="_blank" rel="noopener">https://www.cnblogs.com/Qian123/p/5713440.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/09/python方法/" rel="next" title="python函数">
+                <i class="fa fa-chevron-left"></i> python函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/10/java内存区域和内存溢出/" rel="prev" title="java内存区域和内存溢出">
+                java内存区域和内存溢出 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数"><span class="nav-number">1.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造代码块"><span class="nav-number">2.</span> <span class="nav-text">构造代码块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态代码块"><span class="nav-number">3.</span> <span class="nav-text">静态代码块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java类初始化顺序"><span class="nav-number">4.</span> <span class="nav-text">Java类初始化顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对于一个类的情况"><span class="nav-number">4.1.</span> <span class="nav-text">对于一个类的情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承的情况"><span class="nav-number">4.2.</span> <span class="nav-text">继承的情况</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

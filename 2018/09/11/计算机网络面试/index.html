@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="TCP与UDP协议区别 TCP是面向连接的；UDP是面向非连接即发送数据之前是不需要建立连接的 TCP提供可靠服务，也就是说，通过TCP连接传送的数据，无差错，不丢失，不重复；UDP尽最大努力交付，不保证可靠交互；TCP通过校验和、重传控制、序号标识、滑动窗口确认实现可靠传输 TCP面向字节流，UDP面向报文 UDP具有较好的实时性，工作效率比TCP高 TCP对系统资源要求较多，UDP对系统资源要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络面试">
+<meta property="og:url" content="http://yoursite.com/2018/09/11/计算机网络面试/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="TCP与UDP协议区别 TCP是面向连接的；UDP是面向非连接即发送数据之前是不需要建立连接的 TCP提供可靠服务，也就是说，通过TCP连接传送的数据，无差错，不丢失，不重复；UDP尽最大努力交付，不保证可靠交互；TCP通过校验和、重传控制、序号标识、滑动窗口确认实现可靠传输 TCP面向字节流，UDP面向报文 UDP具有较好的实时性，工作效率比TCP高 TCP对系统资源要求较多，UDP对系统资源要">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-11T13:09:47.006Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络面试">
+<meta name="twitter:description" content="TCP与UDP协议区别 TCP是面向连接的；UDP是面向非连接即发送数据之前是不需要建立连接的 TCP提供可靠服务，也就是说，通过TCP连接传送的数据，无差错，不丢失，不重复；UDP尽最大努力交付，不保证可靠交互；TCP通过校验和、重传控制、序号标识、滑动窗口确认实现可靠传输 TCP面向字节流，UDP面向报文 UDP具有较好的实时性，工作效率比TCP高 TCP对系统资源要求较多，UDP对系统资源要">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/11/计算机网络面试/">
+
+
+
+
+
+  <title>计算机网络面试 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/11/计算机网络面试/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机网络面试</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-11T19:56:25+08:00">
+                2018-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="TCP与UDP协议区别"><a href="#TCP与UDP协议区别" class="headerlink" title="TCP与UDP协议区别"></a>TCP与UDP协议区别</h5><ol>
+<li>TCP是面向连接的；UDP是面向非连接即发送数据之前是不需要建立连接的</li>
+<li>TCP提供可靠服务，也就是说，通过TCP连接传送的数据，无差错，不丢失，不重复；UDP尽最大努力交付，不保证可靠交互；TCP通过校验和、重传控制、序号标识、滑动窗口确认实现可靠传输</li>
+<li>TCP面向字节流，UDP面向报文</li>
+<li>UDP具有较好的实时性，工作效率比TCP高</li>
+<li>TCP对系统资源要求较多，UDP对系统资源要求较少</li>
+</ol>
+<h5 id="HTTP-request的几种类型"><a href="#HTTP-request的几种类型" class="headerlink" title="HTTP request的几种类型"></a>HTTP request的几种类型</h5><ul>
+<li>GET 获取URL指定的信息。如果URL指定的是文件，则返回文件的内容；若指定的是CGI程序，则返回盖数据的输出数据</li>
+<li>POST 从客户端向服务器发送数据</li>
+<li>HEAD 和GET基本相同，不过它只返回HTTP消息的头文件，而不返回数据的内容</li>
+<li>OPTIONS 用于通知或查询通讯选项</li>
+<li>DELETE 删除URL指定的服务器文件</li>
+<li>CONNECT 使用代理传输加密时使用的方法</li>
+</ul>
+<h5 id="IP地址的分类"><a href="#IP地址的分类" class="headerlink" title="IP地址的分类"></a>IP地址的分类</h5><p>分类由地址中的头几位来定义：0为A类，10位B类，110为C类，1110位D类，1111位E类</p>
+<p>IP = 网络号 + 主机号</p>
+<p>A类    0.0.0.0 - 127.255.255.255</p>
+<p>B类    128.0.0.0 - 191.255.255.255</p>
+<p>C类    192.0.0.0 - 233.255.255.255</p>
+<p>D类    224.0.0.0 - 239.255.255.255</p>
+<p>E类    240.0.0.0 - 255.255.255.255</p>
+<h5 id="OSI协议"><a href="#OSI协议" class="headerlink" title="OSI协议"></a>OSI协议</h5><p>从上往下依次为：应用层、表示层、会话层、传输层、网络层、数据链路层、物理层</p>
+<h5 id="Http与Https区别"><a href="#Http与Https区别" class="headerlink" title="Http与Https区别"></a>Http与Https区别</h5><p>Http协议运行在TCP之上，明文传输，客户端与服务器端都无法验证对方的身份；Https是身披SSL(Secure Socket Layer)外壳的Http，运行于SSL上，SSL运行于TCP之上，是添加了加密和认证机制的HTTP。二者之间存在如下不同：</p>
+<ul>
+<li>端口不同：Http与Http使用不同的连接方式，用的端口也不一样，前者是80，后者是443；</li>
+<li>资源消耗：和HTTP通信相比，Https通信会由于加减密处理消耗更多的CPU和内存资源；</li>
+<li>开销：Https通信需要证书，而证书一般需要向认证机构购买；<br>Https的加密机制是一种共享密钥加密和公开密钥加密并用的混合加密机制。</li>
+</ul>
+<h5 id="TCP协议如何来保证传输的可靠性"><a href="#TCP协议如何来保证传输的可靠性" class="headerlink" title="TCP协议如何来保证传输的可靠性"></a>TCP协议如何来保证传输的可靠性</h5><p>TCP提供一种面向连接的、可靠的字节流服务。其中，面向连接意味着两个使用TCP的应用（通常是一个客户和一个服务器）在彼此交换数据之前必须先建立一个TCP连接。在一个TCP连接中，仅有两方进行彼此通信；而字节流服务意味着两个应用程序通过TCP链接交换8bit字节构成的字节流，TCP不在字节流中插入记录标识符。</p>
+<p>对于可靠性，TCP通过以下方式进行保证：</p>
+<ul>
+<li>数据包校验：目的是检测数据在传输过程中的任何变化，若校验出包有错，则丢弃报文段并且不给出响应，这时TCP发送数据端超时后会重发数据；</li>
+<li>对失序数据包重排序：既然TCP报文段作为IP数据报来传输，而IP数据报的到达可能会失序，因此TCP报文段的到达也可能会失序。TCP将对失序数据进行重新排序，然后才交给应用层；</li>
+<li>丢弃重复数据：对于重复数据，能够丢弃重复数据；</li>
+<li>应答机制：当TCP收到发自TCP连接另一端的数据，它将发送一个确认。这个确认不是立即发送，通常将推迟几分之一秒；</li>
+<li>超时重发：当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段；</li>
+<li>流量控制：TCP连接的每一方都有固定大小的缓冲空间。TCP的接收端只允许另一端发送接收端缓冲区所能接纳的数据，这可以防止较快主机致使较慢主机的缓冲区溢出，这就是流量控制。TCP使用的流量控制协议是可变大小的滑动窗口协议。</li>
+</ul>
+<h5 id="Get与POST的区别"><a href="#Get与POST的区别" class="headerlink" title="Get与POST的区别"></a>Get与POST的区别</h5><p>　　GET与POST是我们常用的两种HTTP Method，二者之间的区别主要包括如下五个方面：</p>
+<p>(1). 从功能上讲，GET一般用来从服务器上获取资源，POST一般用来更新服务器上的资源；</p>
+<p>(2). 从REST服务角度上说，GET是幂等的，即读取同一个资源，总是得到相同的数据，而POST不是幂等的，因为每次请求对资源的改变并不是相同的；进一步地，GET不会改变服务器上的资源，而POST会对服务器资源进行改变；</p>
+<p>(3). 从请求参数形式上看，GET请求的数据会附在URL之后，即将请求数据放置在HTTP报文的 请求头 中，以?分割URL和传输数据，参数之间以&amp;相连。特别地，如果数据是英文字母/数字，原样发送；否则，会将其编码为 application/x-www-form-urlencoded MIME 字符串(如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密，得出如：%E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII)；而POST请求会把提交的数据则放置在是HTTP请求报文的 请求体 中。</p>
+<p>(4). 就安全性而言，POST的安全性要比GET的安全性高，因为GET请求提交的数据将明文出现在URL上，而且POST请求参数则被包装到请求体中，相对更安全。</p>
+<p>(5). 从请求的大小看，GET请求的长度受限于浏览器或服务器对URL长度的限制，允许发送的数据量比较小，而POST请求则是没有大小限制的。</p>
+<h5 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h5><p>SQL注入就是通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。</p>
+<p>1). SQL注入攻击的总体思路</p>
+<p>　　(1). 寻找到SQL注入的位置<br>　　(2). 判断服务器类型和后台数据库类型<br>　　(3). 针对不通的服务器和数据库特点进行SQL注入攻击</p>
+<hr>
+<p>2). SQL注入攻击实例</p>
+<p>　　比如，在一个登录界面，要求输入用户名和密码，可以这样输入实现免帐号登录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户名： ‘or 1 = 1 --</span><br><span class="line">密 码：12</span><br></pre></td></tr></table></figure>
+<p>　　用户一旦点击登录，如若没有做特殊处理，那么这个非法用户就很得意的登陆进去了。这是为什么呢?下面我们分析一下：从理论上说，后台认证程序中会有如下的SQL语句：String sql = “select <em> from user_table where username=’ “+userName+” ’ and password=’ “+password+” ‘”; 因此，当输入了上面的用户名和密码，上面的SQL语句变成：SELECT </em> FROM user_table WHERE username=’’or 1 = 1 – and password=’’。分析上述SQL语句我们知道，<br>username=‘ or 1=1 这个语句一定会成功；然后后面加两个-，这意味着注释，它将后面的语句注释，让他们不起作用。这样，上述语句永远都能正确执行，用户轻易骗过系统，获取合法身份。</p>
+<hr>
+<p>3). 应对方法</p>
+<p>(1). 参数绑定</p>
+<p>　　使用预编译手段，绑定参数是最好的防SQL注入的方法。目前许多的ORM框架及JDBC等都实现了SQL预编译和参数绑定功能，攻击者的恶意SQL会被当做SQL的参数而不是SQL命令被执行。在mybatis的mapper文件中，对于传递的参数我们一般是使用#和$来获取参数值。当使用#时，变量是占位符，就是一般我们使用javajdbc的PrepareStatement时的占位符，所有可以防止sql注入；当使用$时，变量就是直接追加在sql中，一般会有sql注入问题。</p>
+<p>(2). 使用正则表达式过滤传入的参数</p>
+<h5 id="简单解释一些ARP协议的工作过程"><a href="#简单解释一些ARP协议的工作过程" class="headerlink" title="简单解释一些ARP协议的工作过程"></a>简单解释一些ARP协议的工作过程</h5><ol>
+<li>首先，每个主机都会在自己的ARP缓冲区中建立一个ARP列表，以表示IP和MAC地址之间的映射关系</li>
+<li>当源主机要发送数据时，首先检查ARP列表中是否有对应的IP地址的目的地址的MAC地址，如果有，则直接发送数据；如果没有，就向本网段的所有主机发送ARP数据包，该数据包包括的内容有：源主机IP地址，源主机MAC地址，目的主机IP地址</li>
+<li>当本网段的所有主机收到该ARP数据包时，首先检查数据包中的IP地址是否是自己的IP地址，如果不是，则忽略该数据包；如果是，则首先从数据包中取出源主机的IP和MAC地址写入到ARP列表中，如果已经存在，则覆盖，然后将自己的MAC地址写入到ARP响应中，告诉源主机自己是它想要找的MAC地址</li>
+<li>源主机接到ARP响应后。将目的主机的MAC地址写入ARP列表，并利用此信息发送数据。如果源主机一直没有收到ARP响应数据包，表示查询失败。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/11/python装饰器/" rel="next" title="python的装饰器与闭包">
+                <i class="fa fa-chevron-left"></i> python的装饰器与闭包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/14/指针问题/" rel="prev" title="指针问题">
+                指针问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP与UDP协议区别"><span class="nav-number">1.</span> <span class="nav-text">TCP与UDP协议区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP-request的几种类型"><span class="nav-number">2.</span> <span class="nav-text">HTTP request的几种类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#IP地址的分类"><span class="nav-number">3.</span> <span class="nav-text">IP地址的分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#OSI协议"><span class="nav-number">4.</span> <span class="nav-text">OSI协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Http与Https区别"><span class="nav-number">5.</span> <span class="nav-text">Http与Https区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP协议如何来保证传输的可靠性"><span class="nav-number">6.</span> <span class="nav-text">TCP协议如何来保证传输的可靠性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Get与POST的区别"><span class="nav-number">7.</span> <span class="nav-text">Get与POST的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SQL注入"><span class="nav-number">8.</span> <span class="nav-text">SQL注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简单解释一些ARP协议的工作过程"><span class="nav-number">9.</span> <span class="nav-text">简单解释一些ARP协议的工作过程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
